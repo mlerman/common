@@ -1,4 +1,15 @@
 <?php
+$files_path = file_get_contents(getcwd().'\core_settings\FILES_PATH.sh.bat');
+echo $files_path;
+echo '<br/>';
+echo getcwd() . "\n";
+echo '<br/>';
+$files_path = str_replace("set FILES_PATH=", "", $files_path);
+echo $files_path;
+echo '<br/>';
+
+
+
 // detect OS on client
 $onmouseover='';    // TODO previent erreur avec wampserver, a revoir
 $param1='';
