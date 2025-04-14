@@ -1,11 +1,25 @@
 <?php
 $files_path = file_get_contents(getcwd().'\core_settings\FILES_PATH.sh.bat');
-echo $files_path;
+// echo $files_path;
 echo '<br/>';
-echo getcwd() . "\n";
+echo 'on est dans ' . getcwd() . "\n";
 echo '<br/>';
 $files_path = str_replace("set FILES_PATH=", "", $files_path);
-echo $files_path;
+$files_path = str_replace("\\", "/", $files_path);
+// remove trailing slash
+$files_path = rtrim($files_path, '/');
+echo 'FILES_PATH est ' . $files_path;  // example C:/UniServer/www/doc/files
+echo '<br/>';
+
+// Find the last slash
+$lastSlash = strrpos($files_path, "/");
+
+// Find the second to last slash
+$secondLastSlash = strrpos(substr($files_path, 0, $lastSlash), "/");
+
+// Extract the substring from the second to last slash onwards
+$slash_doc = substr($files_path, $secondLastSlash);
+echo 'slash_doc est ' . $slash_doc;  // example /doc/files
 echo '<br/>';
 
 
@@ -14,6 +28,7 @@ echo '<br/>';
 $onmouseover='';    // TODO previent erreur avec wampserver, a revoir
 $param1='';
 $link =  "//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+echo 'link est '.$link.'<br/>';
 $linkip =  "//$_SERVER[SERVER_ADDR]$_SERVER[REQUEST_URI]";
 $hostname=gethostname();
 $linkname =  "//$hostname$_SERVER[REQUEST_URI]";
@@ -33,7 +48,7 @@ $urldir=substr($display_link, $pos);
 $display_link=substr($display_link, $pos+10);
 
 //$dir=     substr($_GET["reqfname"], 0, strrpos($_GET["reqfname"], "/"));
-$dir="C:/UniServer/www/doc/files".substr($display_link, 0, -1);
+$dir=$files_path.substr($display_link, 0, -1);
 
 $dir=str_replace("%60","`",$dir);
 //echo "dir is ".$dir;
@@ -66,7 +81,7 @@ if (file_exists($dir."/autoexec.bat")) {
 $icon_run="";
 if (file_exists("/UniServer/www".$dir_loc."/ui_run.run")) {
 	//echo "<script>alert('".$dir_loc."');</script>";
-	$icon_run="<a href='/doc/files/common/downloadfile.php?fname=ui_run.run&targetdir=/UniServer/www".$dir_loc."&admin=0'><img src='/doc/files/common/images//Play-1-Hot-icon.png'/></a>";
+	$icon_run="<a href='/doc/files/common/downloadfile.php?fname=ui_run.run&targetdir=/UniServer/www".$dir_loc."&admin=0'><img src='./images/Play-1-Hot-icon.png'/></a>";
 }
 
 include 'oslist.php';
@@ -93,10 +108,10 @@ $mac="mac";
 $CurrOS="Linux";
 }
 //echo "CurrOS is -".$CurrOS."-".$android."<br/>";
-if (($CurrOS=="Linux")&&($android=="")&&($mac=="")) echo "<img src='/doc/files/common/images//linux.png' title='You are running Linux'>&nbsp;";
-if ($android=="Android") echo "<img src='/doc/files/common/images//android_ico.png' title='You are running Android'>&nbsp;";
-if ($mac=="mac") echo "<img src='/doc/files/common/images//osx.png' title='You are running Android'>&nbsp;";
-if (($CurrOS=="Windows 7")||($CurrOS=="Windows 10")) echo "<img src='/doc/files/common/images//Windows16.png' title='You are running Windows 7'>&nbsp;";
+if (($CurrOS=="Linux")&&($android=="")&&($mac=="")) echo "<img src=./images/linux.png' title='You are running Linux'>&nbsp;";
+if ($android=="Android") echo "<img src='./images/android_ico.png' title='You are running Android'>&nbsp;";
+if ($mac=="mac") echo "<img src='./images/osx.png' title='You are running Android'>&nbsp;";
+if (($CurrOS=="Windows 7")||($CurrOS=="Windows 10")) echo "<img src='./images/Windows16.png' title='You are running Windows 7'>&nbsp;";
 //echo "HTTP_USER_AGENT is ".$_SERVER['HTTP_USER_AGENT']."<br/>";
 
 /**
@@ -339,7 +354,7 @@ iframe {
 }
 
 .run_box + label{
-    background:url('/doc/files/common/images//run-unchecked.png') no-repeat;
+    background:url('./images//run-unchecked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -351,7 +366,7 @@ iframe {
 }
 
 .run_box:checked + label{
-    background:url('/doc/files/common/images//run-checked.png') no-repeat;
+    background:url('./images//run-checked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -371,7 +386,7 @@ iframe {
 }
 
 .hlp_box + label{
-    background:url('/doc/files/common/images//help-unchecked.png') no-repeat;
+    background:url('./images//help-unchecked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -383,7 +398,7 @@ iframe {
 }
 
 .hlp_box:checked + label{
-    background:url('/doc/files/common/images//help-checked.png') no-repeat;
+    background:url('./images/help-checked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -403,7 +418,7 @@ iframe {
 }
 
 .pdf_box + label{
-    background:url('/doc/files/common/images//pdf-unchecked.png') no-repeat;
+    background:url('./images/pdf-unchecked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -415,7 +430,7 @@ iframe {
 }
 
 .pdf_box:checked + label{
-    background:url('/doc/files/common/images//pdf-checked.png') no-repeat;
+    background:url('./images/pdf-checked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -435,7 +450,7 @@ iframe {
 }
 
 .pty_box + label{
-    background:url('/doc/files/common/images//putty-unchecked.png') no-repeat;
+    background:url('./images/putty-unchecked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -447,7 +462,7 @@ iframe {
 }
 
 .pty_box:checked + label{
-    background:url('/doc/files/common/images//putty-checked.png') no-repeat;
+    background:url('./images/putty-checked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -467,7 +482,7 @@ iframe {
 }
 
 .ssh_box + label{
-    background:url('/doc/files/common/images//putty-unchecked.png') no-repeat;
+    background:url('./images/putty-unchecked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -479,7 +494,7 @@ iframe {
 }
 
 .ssh_box:checked + label{
-    background:url('/doc/files/common/images//putty-checked.png') no-repeat;
+    background:url('./images/putty-checked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -499,7 +514,7 @@ iframe {
 }
 
 .ver_box + label{
-    background:url('/doc/files/common/images//version-unchecked.png') no-repeat;
+    background:url('./images/version-unchecked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -511,7 +526,7 @@ iframe {
 }
 
 .ver_box:checked + label{
-    background:url('/doc/files/common/images//version-checked.png') no-repeat;
+    background:url('./images/version-checked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -531,7 +546,7 @@ iframe {
 }
 
 .ftp_box + label{
-    background:url('/doc/files/common/images//totalcommander16ftp-unchecked.png') no-repeat;
+    background:url('./images/totalcommander16ftp-unchecked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -543,7 +558,7 @@ iframe {
 }
 
 .ftp_box:checked + label{
-    background:url('/doc/files/common/images//totalcommander16ftp-checked.png') no-repeat;
+    background:url('./images/totalcommander16ftp-checked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -563,7 +578,7 @@ iframe {
 }
 
 .cd_box + label{
-    background:url('/doc/files/common/images//totalcommander16-unchecked.png') no-repeat;
+    background:url('./images/totalcommander16-unchecked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -575,7 +590,7 @@ iframe {
 }
 
 .cd_box:checked + label{
-    background:url('/doc/files/common/images//totalcommander16-checked.png') no-repeat;
+    background:url('./images/totalcommander16-checked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -596,7 +611,7 @@ iframe {
 }
 
 .reg_box + label{
-    background:url('/doc/files/common/images//regedit-unchecked.png') no-repeat;
+    background:url('./images/regedit-unchecked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -608,7 +623,7 @@ iframe {
 }
 
 .reg_box:checked + label{
-    background:url('/doc/files/common/images//regedit-checked.png') no-repeat;
+    background:url('./images/regedit-checked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -628,7 +643,7 @@ iframe {
 }
 
 .bld_box + label{
-    background:url('/doc/files/common/images//build-unchecked.png') no-repeat;
+    background:url('./images/build-unchecked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -640,7 +655,7 @@ iframe {
 }
 
 .bld_box:checked + label{
-    background:url('/doc/files/common/images//build-checked.png') no-repeat;
+    background:url('./images/build-checked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -660,7 +675,7 @@ iframe {
 }
 
 .bed_box + label{
-    background:url('/doc/files/common/images//iFrame16-unchecked.png') no-repeat;
+    background:url('./images/iFrame16-unchecked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -672,7 +687,7 @@ iframe {
 }
 
 .bed_box:checked + label{
-    background:url('/doc/files/common/images//iFrame16-checked.png') no-repeat;
+    background:url('./images/iFrame16-checked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -692,7 +707,7 @@ iframe {
 }
 
 .scp_box + label{
-    background:url('/doc/files/common/images//winscp16-unchecked.png') no-repeat;
+    background:url('./images/winscp16-unchecked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -704,7 +719,7 @@ iframe {
 }
 
 .scp_box:checked + label{
-    background:url('/doc/files/common/images//winscp16-checked.png') no-repeat;
+    background:url('./images/winscp16-checked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -724,7 +739,7 @@ iframe {
 }
 
 .ie_box + label{
-    background:url('/doc/files/common/images//iexplore16-unchecked.png') no-repeat;
+    background:url('./images/iexplore16-unchecked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -736,7 +751,7 @@ iframe {
 }
 
 .ie_box:checked + label{
-    background:url('/doc/files/common/images//iexplore16-checked.png') no-repeat;
+    background:url('./images/iexplore16-checked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -757,7 +772,7 @@ iframe {
 }
 
 .cod_box + label{
-    background:url('/doc/files/common/images//code-unchecked.png') no-repeat;
+    background:url('./images/code-unchecked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -769,7 +784,7 @@ iframe {
 }
 
 .cod_box:checked + label{
-    background:url('/doc/files/common/images//code-checked.png') no-repeat;
+    background:url('./images/code-checked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -789,7 +804,7 @@ iframe {
 }
 
 .jir_box + label{
-    background:url('/doc/files/common/images//jira16-unchecked.png') no-repeat;
+    background:url('./images/jira16-unchecked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -801,7 +816,7 @@ iframe {
 }
 
 .jir_box:checked + label{
-    background:url('/doc/files/common/images//jira16-checked.png') no-repeat;
+    background:url('./images/jira16-checked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -1215,7 +1230,7 @@ function customAlertRight(msg,duration, right, top)		// http://mlerman-lap/s/W
  {
    for(ii=0; ii<arr_admin.length; ii++)
    {
-     document.getElementById('customdivright').innerHTML +="<br/>&nbsp;<span id='copy_button_admin_"+ii+"' data-clipboard-text='"+arr_admin[ii][0]+"' title='copy to clipboard' style='cursor:pointer'  onmouseover='this.style.backgroundColor=\"white\"' onclick='bindme(this.id, 0);'><img src=\"/doc/files/common/images//copyclip.png\"/>&nbsp;"+arr_admin[ii][1]+"</span>";
+     document.getElementById('customdivright').innerHTML +="<br/>&nbsp;<span id='copy_button_admin_"+ii+"' data-clipboard-text='"+arr_admin[ii][0]+"' title='copy to clipboard' style='cursor:pointer'  onmouseover='this.style.backgroundColor=\"white\"' onclick='bindme(this.id, 0);'><img src=\"./images/copyclip.png\"/>&nbsp;"+arr_admin[ii][1]+"</span>";
    }
    admin_array_added=true;
  }  
@@ -1277,8 +1292,8 @@ getFileFromServer('/local/recentfirst.php', function(text){
 }
 </script>
 
-<a href="http://<?php echo $linkip; ?>"><img src="/doc/files/common/images/adresse-ip.png"/></a>&nbsp;
-<a href="http://<?php echo $linkname; ?>"><img src="/doc/files/common/images/adresse-name.png"/></a>&nbsp;
+<a href="http://<?php echo $linkip; ?>"><img src="./images/adresse-ip.png"/></a>&nbsp;
+<a href="http://<?php echo $linkname; ?>"><img src="./images/adresse-name.png"/></a>&nbsp;
 <?php
 if ($icon_run!="") {
   echo "&nbsp;".$icon_run."&nbsp;";
@@ -1289,25 +1304,25 @@ if($CurrOS!="Linux")
 {
   $dirp="perma";
   $file="ui_total_commander.run";
-  echo '&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="/doc/files/common/images/totalcommander16.png" title="Total commander" /></a>';  
+  echo '&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="./images/totalcommander16.png" title="Total commander" /></a>';  
 } else
 {
 	$dirpm="permalinux";
 	$file="krusaderHere.rn";
-	echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="/doc/files/common/images/krusader16.png" title="krusader" /></a>';
+	echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="./images/krusader16.png" title="krusader" /></a>';
 }
 ?>
 <!-- top links http://mlerman-lap/s/O -->
-&nbsp;<a href="http://<?php echo $clienthost; ?>/doc/elfinder.html" id="homelink" target="elfinder"><img src="/doc/files/common/images/home.png" title="Go to <?php echo $clienthost; ?> elfinder" id="hometitle" /></a>&nbsp;
-&nbsp;<a href="/doc/files/common/zipfolder.php?fname=<?php echo $prjname; ?>&targetdir=<?php echo realpath($dir); ?>&debug=12345678"><img src="/doc/files/common/images/compress-icon.png" title="Download this folder zipped"/></a>&nbsp;
+&nbsp;<a href="http://<?php echo $clienthost; ?>/doc/elfinder.html" id="homelink" target="elfinder"><img src="./images/home.png" title="Go to <?php echo $clienthost; ?> elfinder" id="hometitle" /></a>&nbsp;
+&nbsp;<a href="/doc/files/common/zipfolder.php?fname=<?php echo $prjname; ?>&targetdir=<?php echo realpath($dir); ?>&debug=12345678"><img src="./images/compress-icon.png" title="Download this folder zipped"/></a>&nbsp;
 <!--
-&nbsp;<a href="/doc/files/common/env.php&targetdir=<?php echo $dir; ?>" target="env" onclick="javascript:void window.open('/doc/files/common/env.php?targetdir=<?php echo $dir; ?>','1481656702602','width=1500,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/Programming-Variable-icon16.png" title="Manage environment variables" /></a>
+&nbsp;<a href="/doc/files/common/env.php&targetdir=<?php echo $dir; ?>" target="env" onclick="javascript:void window.open('/doc/files/common/env.php?targetdir=<?php echo $dir; ?>','1481656702602','width=1500,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/Programming-Variable-icon16.png" title="Manage environment variables" /></a>
 -->
-&nbsp;<a href="/doc/files/common/env.php&targetdir=<?php echo $dir; ?>" target="env" onclick="javascript:void window.open('/doc/files/common/frename.php?targetdir=<?php echo $dir; ?>','1481656702602','width=800,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/Programming-Variable-icon16.png" title="Manage file names" /></a>
-&nbsp;<a href="http://<?php echo $clienthost.$dir_loc; ?>/../_constructor/open-command-prompt-here.html" target="_constructor"><img src="/doc/files/common/images/constructor.ico" title="Go to _constructor" /></a>&nbsp;
-&nbsp;<a href="/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/frequent_copy_paste/" target="chartime" onclick="javascript:void window.open('/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/frequent_copy_paste/','1481656702602','width=800,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/copyclip.png" title="frequent copy paste" /></a>
-&nbsp;<a href="/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/Codiad/?name=<?php echo $prjname; ?>&path=<?php echo $proj_dir; ?>" target="codiad" onclick="javascript:void window.open('/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/Codiad/?name=<?php echo $prjname; ?>&path=<?php echo $proj_dir; ?>','1481656702602','width=800,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/codiad16.png" title="CODIAD editor" /></a>
-&nbsp;<a href="<?php echo $urldir; ?>"><img src="/doc/files/common/images/chrome16.png" title="index.html" /></a>
+&nbsp;<a href="/doc/files/common/env.php&targetdir=<?php echo $dir; ?>" target="env" onclick="javascript:void window.open('/doc/files/common/frename.php?targetdir=<?php echo $dir; ?>','1481656702602','width=800,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/Programming-Variable-icon16.png" title="Manage file names" /></a>
+&nbsp;<a href="http://<?php echo $clienthost.$dir_loc; ?>/../_constructor/open-command-prompt-here.html" target="_constructor"><img src="./images/constructor.ico" title="Go to _constructor" /></a>&nbsp;
+&nbsp;<a href="/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/frequent_copy_paste/" target="chartime" onclick="javascript:void window.open('/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/frequent_copy_paste/','1481656702602','width=800,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/copyclip.png" title="frequent copy paste" /></a>
+&nbsp;<a href="/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/Codiad/?name=<?php echo $prjname; ?>&path=<?php echo $proj_dir; ?>" target="codiad" onclick="javascript:void window.open('/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/Codiad/?name=<?php echo $prjname; ?>&path=<?php echo $proj_dir; ?>','1481656702602','width=800,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/codiad16.png" title="CODIAD editor" /></a>
+&nbsp;<a href="<?php echo $urldir; ?>"><img src="./images/chrome16.png" title="index.html" /></a>
 <?php
 $githuburl="https://github.com/mlerman/WIN10LAP/tree/master".$display_link;
 ?>
@@ -1319,11 +1334,11 @@ if (file_exists($dir."/.code")) {
   } 
 ?>
 
-&nbsp;<a href="/doc/files/common/env.php&targetdir=C:/UniServer/www/doc/files/common/global_settings" target="env" onclick="javascript:void window.open('/doc/files/common/env.php?targetdir=C:/UniServer/www/doc/files/common/global_settings','1481656702602','width=1800,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/Programming-Variable-icon16.png" title="Manage environment variables" /></a>
+&nbsp;<a href="/doc/files/common/env.php&targetdir=C:/UniServer/www/doc/files/common/global_settings" target="env" onclick="javascript:void window.open('/doc/files/common/env.php?targetdir=C:/UniServer/www/doc/files/common/global_settings','1481656702602','width=1800,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/Programming-Variable-icon16.png" title="Manage environment variables" /></a>
 <!--
 &nbsp;<a href="https://confluence.microchip.com/pages/viewpage.action?pageId=319526555" target="confluence" onclick="javascript:void window.open('https://confluence.microchip.com/pages/viewpage.action?pageId=319526555','1481656702602','width=1100,height=700,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;">ML</a>
 -->
-&nbsp;<a href="javascript:alert('onclick event sometimes was not fired');" target="shorturl" onclick="window.open('/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/extplorer2-1-15/index.php?lang=english&homedir=<?php echo $proj_dir;?>','shortenanurl','width=1200,height=600,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/extplorer16.png" title="ExtPlorer" /></a>
+&nbsp;<a href="javascript:alert('onclick event sometimes was not fired');" target="shorturl" onclick="window.open('/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/extplorer2-1-15/index.php?lang=english&homedir=<?php echo $proj_dir;?>','shortenanurl','width=1200,height=600,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/extplorer16.png" title="ExtPlorer" /></a>
 
 &nbsp;<span><?php if (file_exists($dir."/.outtop")) { echo @file_get_contents($dir."/.outtop");} ?></span>
 
@@ -1331,18 +1346,18 @@ if (file_exists($dir."/.code")) {
 <fieldset style="float: left;">
 
 <fieldset style="float: left;">
-<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.previous&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>" ><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>
-        <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.previous");  return false;'><img src="/doc/files/common/images/text.png"/></a>
-              <a href="/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePagePrevious" target="pickf" onclick="javascript:void window.open('/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePagePrevious','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/add_file.png"/></a>
-        &nbsp;<img src="/doc/files/common/images/Arrowprevious48.png"/> 
+<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.previous&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>" ><img src="./images/notepad-plus-plus.gif"/></a>
+        <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.previous");  return false;'><img src="./images/text.png"/></a>
+              <a href="/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePagePrevious" target="pickf" onclick="javascript:void window.open('/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePagePrevious','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/add_file.png"/></a>
+        &nbsp;<img src="./images/Arrowprevious48.png"/> 
 </legend>
 <?php echo @file_get_contents($proj_dir."/.previous"); ?>
 </fieldset>
 <fieldset>
-<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.next&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>
-        <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.next");  return false;'><img src="/doc/files/common/images/text.png"/></a>
-              <a href="/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePageNext" target="pickf" onclick="javascript:void window.open('/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePageNext','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/add_file.png"/></a>
-        &nbsp;<img src="/doc/files/common/images/Arrownext48.png"/> 
+<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.next&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif"/></a>
+        <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.next");  return false;'><img src="./images/text.png"/></a>
+              <a href="/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePageNext" target="pickf" onclick="javascript:void window.open('/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePageNext','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/add_file.png"/></a>
+        &nbsp;<img src="./images/Arrownext48.png"/> 
 </legend>
 <?php echo @file_get_contents($proj_dir."/.next"); ?>
 </fieldset>
@@ -1397,10 +1412,10 @@ alert(  'current : ' + window.name
 </script>
 <!--a href="<?php echo $urldir; ?>open-command-prompt-here.html" target="<?php echo $prjname; ?>" title="Re-open in tab target <?php echo $prjname; ?>"><?php echo $prjname; ?></a-->
 <?php echo $prjname; ?>
-&nbsp;<span id="copy-button-2" data-clipboard-text="<?php echo $prjname; ?>" title="copy project name to clipboard" onmouseover="this.style.backgroundColor = 'white'" onclick='bindme(this.id, 0);'><img src="/doc/files/common/images/copyclip.png"/></span>
-&nbsp;<a href="/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/d3_directed_graph/project_graph.php?target=<?php echo $urldir; ?>" onclick="javascript:void window.open('/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/d3_directed_graph/project_graph.php?target=<?php echo $urldir; ?>','1481602525735','width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');return false;" ><img src="/doc/files/common/images/digraph.gif" /></a>
-&nbsp;<span onclick="debug();"><img src=/doc/files/common/images//debug.png /></span>
-&nbsp;<span onclick="adjust_target();" id="animreload" style="display:none"><img src=/doc/files/common/images//loader_grayblue.gif /></span>
+&nbsp;<span id="copy-button-2" data-clipboard-text="<?php echo $prjname; ?>" title="copy project name to clipboard" onmouseover="this.style.backgroundColor = 'white'" onclick='bindme(this.id, 0);'><img src="./images/copyclip.png"/></span>
+&nbsp;<a href="/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/d3_directed_graph/project_graph.php?target=<?php echo $urldir; ?>" onclick="javascript:void window.open('/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/d3_directed_graph/project_graph.php?target=<?php echo $urldir; ?>','1481602525735','width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');return false;" ><img src="./images/digraph.gif" /></a>
+&nbsp;<span onclick="debug();"><img src=./images//debug.png /></span>
+&nbsp;<span onclick="adjust_target();" id="animreload" style="display:none"><img src=./images//loader_grayblue.gif /></span>
 
 <script>
 
@@ -1428,9 +1443,9 @@ if($param1!="") echo "\";";
 
 
 <fieldset style="float: left;">
-<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.related&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>
-    <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.related");  return false;'><img src="/doc/files/common/images/text.png"/></a>
-              <a href="/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePage" target="pickf" onclick="javascript:void window.open('/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePage','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/add_file.png"/></a>
+<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.related&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif"/></a>
+    <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.related");  return false;'><img src="./images/text.png"/></a>
+              <a href="/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePage" target="pickf" onclick="javascript:void window.open('/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePage','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/add_file.png"/></a>
         &nbsp;<small>(.related)</small> Related: 
 </legend>
 <?php echo @file_get_contents($proj_dir."/.related"); ?>
@@ -1447,9 +1462,9 @@ if ($no_favicon)     echo "&nbsp;<a href=\"https://www.google.com/search?q=".$pr
 
 
 <fieldset>
-<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.head&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a> 
-        <a href="/doc/files/common/do.php?&targetdir=<?php echo realpath($dir); ?>&targetfile=.head" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.head");  return false;'><img src="/doc/files/common/images/text.png"/></a>
-		&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.head&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>&before=addhr"><img src="/doc/files/common/images/embedicon.png"/></a> 
+<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.head&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif"/></a> 
+        <a href="/doc/files/common/do.php?&targetdir=<?php echo realpath($dir); ?>&targetfile=.head" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.head");  return false;'><img src="./images/text.png"/></a>
+		&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.head&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>&before=addhr"><img src="./images/embedicon.png"/></a> 
               <small>(.head)</small> Notes: 
 </legend>
 <pre>
@@ -1474,7 +1489,7 @@ else
 <?php
 $escaped_link_cut.="favicon.ico";
 
-$file_data = '<a href="/doc/files/common/delete_line_in_recent.php?line='.uniqid().'" onclick="delEntry(this.href); return false;"><img src="/doc/files/common/images/delete.png"/></a>&nbsp;<a href="'.$dir_loc.'/open-command-prompt-here.html" target="'.$prjname.'"><img src="'.$dir_loc.'/favicon.ico"  height="16" width="16"/>'.$display_link.'</a>'.$icon_run."<br/>\n";
+$file_data = '<a href="/doc/files/common/delete_line_in_recent.php?line='.uniqid().'" onclick="delEntry(this.href); return false;"><img src="./images/delete.png"/></a>&nbsp;<a href="'.$dir_loc.'/open-command-prompt-here.html" target="'.$prjname.'"><img src="'.$dir_loc.'/favicon.ico"  height="16" width="16"/>'.$display_link.'</a>'.$icon_run."<br/>\n";
 $ignorebefore=109;
 
 
@@ -1521,7 +1536,7 @@ if(substr($file_data,$ignorebefore)!=substr($firstline,$ignorebefore)) {		// onl
   </tr>
 </table>
 
-<img src="/doc/files/common/images/command_promt-16.png" title="Run a command or input PARAM1" style="float: left;" /><span style="float: left;">&nbsp;</span>
+<img src="./images/command_promt-16.png" title="Run a command or input PARAM1" style="float: left;" /><span style="float: left;">&nbsp;</span>
 <form name="fform" id="f1" action="/doc/files/common/prompt-action.php" method="get" style="display: inline; float: left;" target="_raw_<?php echo $prjname; ?>">
 	<table align="left" valign="top" width="100%" border="0"><tbody>
 	<tr>
@@ -1534,7 +1549,7 @@ if(substr($file_data,$ignorebefore)!=substr($firstline,$ignorebefore)) {		// onl
 </form>
 <input type="submit" value="Run" onclick="return OnButtonRun();" />
 <input type="submit" value="Save" onclick="return OnButtonRunSave();" />
-<a href="#view" onclick="location.reload(true);"><img src="/doc/files/common/images/eye.gif"/></a>
+<a href="#view" onclick="location.reload(true);"><img src="./images/eye.gif"/></a>
 <input type="submit" value="goto new" id="gotonew" onclick="OnGotoNew();"/>
 
 <script type="text/javascript">
@@ -1588,8 +1603,8 @@ function psexec(phpfile) {
 <table width="100%" style="clear: both;">
   <tr>
     <td><hr /></td>
-    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=specific-here.inc&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>
-    <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>specific-here.inc");  return false;'><img src="/doc/files/common/images/text.png"/></a>
+    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=specific-here.inc&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif"/></a>
+    <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>specific-here.inc");  return false;'><img src="./images/text.png"/></a>
 	&nbsp;<strong>Saved commands specific to this &#34;<script>document.write("<?php echo $prjname; ?>");</script>&#34; project </strong><small>(stored in web page, see specific-here.inc, runs on Windows server)</small></td>
     <td><hr /></td>
   </tr>
@@ -1621,8 +1636,8 @@ if (file_exists($dir.'/'."specific-here.inc"))
 <table width="100%" style="clear: both;">
   <tr>
     <td><hr /></td>
-    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><a href="#view"><span><img src="/doc/files/common/images/eye.gif"></span></a>&nbsp;<img src="/doc/files/common/images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" /></span>&nbsp;<strong>Frequent Edit</strong>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.recentedit&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif" title="Edit this section"/></a>
-	    <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.recentedit");  return false;'><img src="/doc/files/common/images/text.png"/></a>
+    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><a href="#view"><span><img src="./images/eye.gif"></span></a>&nbsp;<img src="./images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" /></span>&nbsp;<strong>Frequent Edit</strong>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.recentedit&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif" title="Edit this section"/></a>
+	    <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.recentedit");  return false;'><img src="./images/text.png"/></a>
 <script>
 function recentedit_plus() {
 // rajouter le contenu de l'input field inpg
@@ -1631,16 +1646,16 @@ var search_or_line_number = document.getElementById('inpg').value;
 window.open('/doc/files/common/jquery-fileTree/pickrecentedit.php?drive=c&param1='+search_or_line_number+'&parent=<?php echo $display_link;?>&headpath=:/UniServer/www/doc/files','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');
 }
 </script>
-		&nbsp;<a href="/doc/files/common/jquery-fileTree/pickrecentedit.php?drive=c&parent=<?php echo $display_link;?>&headpath=:/UniServer/www/doc/files" target="pickf" onclick="recentedit_plus(); return false;"><img src="/doc/files/common/images/add_file.png" title="C:\"/></a>
+		&nbsp;<a href="/doc/files/common/jquery-fileTree/pickrecentedit.php?drive=c&parent=<?php echo $display_link;?>&headpath=:/UniServer/www/doc/files" target="pickf" onclick="recentedit_plus(); return false;"><img src="./images/add_file.png" title="C:\"/></a>
 	<!--
-	&nbsp;&nbsp;<a href="/doc/files/common/jquery-fileTree/pickrecentedit.php?drive=//&parent=<?php echo $display_link;?>&headpath=mlerman-vm-mint/lfiles" target="pickf"><img src="/doc/files/common/images/add_file.png" title="M:\"/></a> 
+	&nbsp;&nbsp;<a href="/doc/files/common/jquery-fileTree/pickrecentedit.php?drive=//&parent=<?php echo $display_link;?>&headpath=mlerman-vm-mint/lfiles" target="pickf"><img src="./images/add_file.png" title="M:\"/></a> 
 	-->
 	<small>Search string or line number:</small>&nbsp;<input size="6" id="inpg"/>
 	</td>
     <td><hr /></td>
   </tr>
 </table>
-<img src="/doc/files/common/images/EditData16.png" title="Drag and drop full file path in this field" style="float: left;" /><span style="float: left;">&nbsp;</span>
+<img src="./images/EditData16.png" title="Drag and drop full file path in this field" style="float: left;" /><span style="float: left;">&nbsp;</span>
 <form name="faddedit" method="get" action="/doc/files/common/addedit.php"  style="float: left;" >
 <input type="text" name="path" id="dropedit" onmouseout="onInputChgEdit(this.value)" onblur="onInputChgEdit(this.value)" size="200" />
 <input type="hidden" name="parent" value=<?php echo $display_link;?> />
@@ -1682,7 +1697,7 @@ if ($feu!="") {
 <table width="100%">
   <tr>
     <td><hr /></td>
-    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><span><a href="#view"><span class="winlink" ><img src="/doc/files/common/images/eye.gif"></span></a>&nbsp;<img src="/doc/files/common/images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Formatted external URL </strong></span></td>
+    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><span><a href="#view"><span class="winlink" ><img src="./images/eye.gif"></span></a>&nbsp;<img src="./images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Formatted external URL </strong></span></td>
     <td><hr /></td>
   </tr>
 </table>
@@ -1702,9 +1717,9 @@ if ( file_exists("/UniServer/www".$dir_loc."/scr1.png"))
     <td style="width:1px; padding: 0 10px; white-space: nowrap;">
       <span>
 	<a href="#view"><span class="winlink" >
-	  <img src="/doc/files/common/images/eye.gif"></a>
+	  <img src="./images/eye.gif"></a>
 	  </span>
-	  &nbsp;<img src="/doc/files/common/images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />
+	  &nbsp;<img src="./images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />
 	  &nbsp;
 	  <strong>
 	    <a nohref="" style="cursor:pointer" onclick="window.open('/doc/files//Engineering/ENVIRONMENT/PHP_SERVER/Image-Gallery-From-Folder-PHP/index.php?HOME_DIRECTORY=<?php echo $proj_dir;?>','gallery','width=1200,height=600,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;">Screenshots</a>
@@ -1737,14 +1752,14 @@ doc.close();
   <tr>
     <td><hr /></td>
     <td style="width:1px; padding: 0 10px; white-space: nowrap;">
-		<img src="/doc/files/common/images/up.png" onclick="window.scrollTo(0, 0);" style="cursor:pointer" title="Scroll all the way up">
-		&nbsp;<a href="#view"><img src="/doc/files/common/images/eye.gif"></a>&nbsp;<a href="#feu"><img src="/doc/files/common/images/link-icon.gif" onclick="location.reload(true);"></a>
-	    &nbsp;<img src="/doc/files/common/images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />
-		<img src="/doc/files/common/images/detach16.gif" onclick="open_div_in_window();">
+		<img src="./images/up.png" onclick="window.scrollTo(0, 0);" style="cursor:pointer" title="Scroll all the way up">
+		&nbsp;<a href="#view"><img src="./images/eye.gif"></a>&nbsp;<a href="#feu"><img src="./images/link-icon.gif" onclick="location.reload(true);"></a>
+	    &nbsp;<img src="./images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />
+		<img src="./images/detach16.gif" onclick="open_div_in_window();">
 		&nbsp;<span class="winlink" >
 		<strong>Interactive windows batch files in this &#34;<script>document.write("<?php echo $prjname; ?>");</script>&#34; project </strong>
 		<small>(download and run local)</small>
-		&nbsp;<input size="6" id="addf" value="ui_test.run"/><a href="#" onclick="AddFile('addf');"><img src="/doc/files/common/images/add_file.png"></a>  
+		&nbsp;<input size="6" id="addf" value="ui_test.run"/><a href="#" onclick="AddFile('addf');"><img src="./images/add_file.png"></a>  
         <div class="checkbox_wrapper">
             <input type="checkbox" class="cd_box" name=".ckcd" <?php echo @file_get_contents($proj_dir."/.ckcd"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckcd"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cd</label>
@@ -1844,27 +1859,27 @@ if ($handle = opendir($dir)) {
 					}
 						echo '<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&admin='.$admin.'" onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'cmdinput\').value;"   >'.$file.'</a>'
 							// to be debuged execute d'un coup
-							.'&nbsp;<a id="view'.$i.'" class="inline" href="/doc/files/common/downloadfile.php?fname=ui_opencon.run&targetdir=C:/UniServer/www/doc/files/Engineering/ENVIRONMENT/PYTHON/interactive_web_shell_standalone&fnamecon='.$file.'&dircon='.realpath($dir).'&admin='.$admin.'" onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'cmdinput\').value;"><img src="/doc/files/common/images/command_promt-16.png" '.$onmouseover_view.' /></a>'
+							.'&nbsp;<a id="view'.$i.'" class="inline" href="/doc/files/common/downloadfile.php?fname=ui_opencon.run&targetdir=C:/UniServer/www/doc/files/Engineering/ENVIRONMENT/PYTHON/interactive_web_shell_standalone&fnamecon='.$file.'&dircon='.realpath($dir).'&admin='.$admin.'" onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'cmdinput\').value;"><img src="./images/command_promt-16.png" '.$onmouseover_view.' /></a>'
                             // was:
-							//.'&nbsp;<a id="view'.$i.'" class="inline" href="/doc/files/common/prompt-action.php?cmd='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/doc/files/common/prompt-action.php?cmd='.$file.'&rawdisplay=1&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="/doc/files/common/images/command_promt-16.png" '.$onmouseover_view.' /></a>'
+							//.'&nbsp;<a id="view'.$i.'" class="inline" href="/doc/files/common/prompt-action.php?cmd='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/doc/files/common/prompt-action.php?cmd='.$file.'&rawdisplay=1&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="./images/command_promt-16.png" '.$onmouseover_view.' /></a>'
 							// to be debuged execute pas a pas
-							.'&nbsp;<a id="view'.$i.'" class="inline" href="/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/shell/shell.php?fname='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/shell/shell.php?fname='.$file.'&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="/doc/files/common/images/debug16.png" '.$onmouseover_view.' /></a>'
+							.'&nbsp;<a id="view'.$i.'" class="inline" href="/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/shell/shell.php?fname='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/shell/shell.php?fname='.$file.'&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="./images/debug16.png" '.$onmouseover_view.' /></a>'
 						// edit icon:
-							.' <a class="winlink" href="/doc/files/common/downloadfile.php?fname=ui_edit_this.run&targetdir='.realpath($dir).'&targetfile='.$file.'&perma='.realpath($dirperma).'"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>'
-							.'<a href="#" onclick=\'openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "'.$urldir.$file.'");  return false;\'><img src="/doc/files/common/images/text.png"/></a>'
+							.' <a class="winlink" href="/doc/files/common/downloadfile.php?fname=ui_edit_this.run&targetdir='.realpath($dir).'&targetfile='.$file.'&perma='.realpath($dirperma).'"><img src="./images/notepad-plus-plus.gif"/></a>'
+							.'<a href="#" onclick=\'openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "'.$urldir.$file.'");  return false;\'><img src="./images/text.png"/></a>'
 							
 						// view icon xxx                                                                                                                 // window.open replace with alert to test
-							.'<a id="view'.$i.'" class="inline" href="/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="/doc/files/common/images/view.png" '.$onmouseover_view.' /></a>'
+							.'<a id="view'.$i.'" class="inline" href="/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="./images/view.png" '.$onmouseover_view.' /></a>'
 						// windows psexec icon
-							.'<a href="/doc/files/common/psexec.php?targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'"  onclick=\'psexec(this.href); return false;\' ><img src="/doc/files/common/images/Windows16.png" title="System" /></a>'
+							.'<a href="/doc/files/common/psexec.php?targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'"  onclick=\'psexec(this.href); return false;\' ><img src="./images/Windows16.png" title="System" /></a>'
 						// for debug showing the output, without return false
-						//	.'<a href="/doc/files/common/psexec.php?targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'"  onclick=\'psexec(this.href); \' ><img src="/doc/files/common/images/Windows16.png"/></a>'
+						//	.'<a href="/doc/files/common/psexec.php?targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'"  onclick=\'psexec(this.href); \' ><img src="./images/Windows16.png"/></a>'
 						// wine icon
-							.'<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname=wine_this.rn&targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath("permalinux").'"  ><img src="/doc/files/common/images/wine16.png"/></a>'
+							.'<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname=wine_this.rn&targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath("permalinux").'"  ><img src="./images/wine16.png"/></a>'
 						// add comment bull icon
-							.'<a id="bulle'.$i.'" class="inline" href="/doc/files/common/downloadfile.php?fname='.($CurrOS!='Linux'?'ui_':'').'edit_this.'.($CurrOS!='Linux'?'run':'rn').'&targetdir='.realpath($dir).'&targetfile=.'.$file.'&perma='.realpath($dirperma).($CurrOS!='Linux'?'':'Linux').'"  ><img src="/doc/files/common/images/'.$str_bulle_icon_png.'"   '.$onmouseover.'/></a>'
+							.'<a id="bulle'.$i.'" class="inline" href="/doc/files/common/downloadfile.php?fname='.($CurrOS!='Linux'?'ui_':'').'edit_this.'.($CurrOS!='Linux'?'run':'rn').'&targetdir='.realpath($dir).'&targetfile=.'.$file.'&perma='.realpath($dirperma).($CurrOS!='Linux'?'':'Linux').'"  ><img src="./images/'.$str_bulle_icon_png.'"   '.$onmouseover.'/></a>'
 						// add screenshot camera icon
-							.'&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname=ui_screenshot.run&targetdir='.realpath($dir).'&urldir='.$urldir.'&targetfile=.'.$file.'&perma='.realpath($dirperma).'"><img src="/doc/files/common/images/screenshot.png"/></a>';
+							.'&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname=ui_screenshot.run&targetdir='.realpath($dir).'&urldir='.$urldir.'&targetfile=.'.$file.'&perma='.realpath($dirperma).'"><img src="./images/screenshot.png"/></a>';
 						echo '<br/>';
 						$i++;
 					}
@@ -1879,7 +1894,7 @@ if ($handle = opendir($dir)) {
 <table width="100%">
   <tr>
     <td><hr /></td>
-    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><img src="/doc/files/common/images/refresh.gif"onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<span class="linuxlink" ><strong>Linux shell files in this &#34;<script>document.write("<?php echo $prjname; ?>");</script>&#34; project </strong><small>(download and run local)</small>&nbsp;<input size="6" id="addfl" value="test.rn"/><a href="#" onclick="AddFile('addfl');"><img src="/doc/files/common/images/add_file.png"></a>
+    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><img src="./images/refresh.gif"onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<span class="linuxlink" ><strong>Linux shell files in this &#34;<script>document.write("<?php echo $prjname; ?>");</script>&#34; project </strong><small>(download and run local)</small>&nbsp;<input size="6" id="addfl" value="test.rn"/><a href="#" onclick="AddFile('addfl');"><img src="./images/add_file.png"></a>
 	
         <div class="checkbox_wrapper">
             <input type="checkbox" class="run_box" name=".cklrun" <?php echo @file_get_contents($proj_dir."/.cklrun"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.cklrun"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
@@ -1913,11 +1928,11 @@ if ($handle = opendir($dir)) {
 				if(($rest==".SH") || ($rest==".RN")) {							// display only .bat files
 						$str_edit="";
 						if($CurrOS=="Linux") {
-							$str_edit = ' <a class="linuxlink" href="/doc/files/common/downloadfile.php?fname=edit_this.rn&targetdir='.realpath($dir).'&targetfile='.$file.'&perma='.realpath("permalinux").'"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>';
+							$str_edit = ' <a class="linuxlink" href="/doc/files/common/downloadfile.php?fname=edit_this.rn&targetdir='.realpath($dir).'&targetfile='.$file.'&perma='.realpath("permalinux").'"><img src="./images/notepad-plus-plus.gif"/></a>';
 						} else {
-							$str_edit = ' <a class="winlink" href="/doc/files/common/downloadfile.php?fname=ui_edit_this.run&targetdir='.realpath($dir).'&targetfile='.$file.'&perma='.realpath("perma").'"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>';
+							$str_edit = ' <a class="winlink" href="/doc/files/common/downloadfile.php?fname=ui_edit_this.run&targetdir='.realpath($dir).'&targetfile='.$file.'&perma='.realpath("perma").'"><img src="./images/notepad-plus-plus.gif"/></a>';
 						}
-						$str_edit.='<a href="#" onclick=\'openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "'.$urldir.$file.'");  return false;\'><img src="/doc/files/common/images/text.png"/></a>';
+						$str_edit.='<a href="#" onclick=\'openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "'.$urldir.$file.'");  return false;\'><img src="./images/text.png"/></a>';
 					if (file_exists ( $dir.'/.'.$file )) {	// prevent error messages in console 404 not found
 							$onmouseover='onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, '.$i.', \'lbulle\')});"';
 					} else {
@@ -1935,20 +1950,20 @@ if ($handle = opendir($dir)) {
 					}
 						echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&term=gnome-terminal"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});">'.$file.'</a>'
 							// to be debug execute
-							.'&nbsp;<a id="lview'.$i.'" class="inline" href="/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/shell/shell.php?fname='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/shell/shell.php?fname='.$file.'&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="/doc/files/common/images/debug16.png" '.$onmouseover_view.' /></a>'
+							.'&nbsp;<a id="lview'.$i.'" class="inline" href="/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/shell/shell.php?fname='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/shell/shell.php?fname='.$file.'&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="./images/debug16.png" '.$onmouseover_view.' /></a>'
 							// edit
 							.$str_edit
 							// view 
-							.'<a id="lview'.$i.'" class="inline" href="/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="/doc/files/common/images/view.png" '.$onmouseover_view.' /></a>'
+							.'<a id="lview'.$i.'" class="inline" href="/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="./images/view.png" '.$onmouseover_view.' /></a>'
 							// run a linux gui with windows psexec
-							.'<a class="winlink" href="/doc/files/common/runinlinux.php?targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'"  onclick=\'psexec(this.href); return false;\' ><img src="/doc/files/common/images/linux.png"/></a>'
-							//.'<a class="winlink" href="/doc/files/common/runinlinux.php?targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'"  onclick=\'psexec(this.href); \' ><img src="/doc/files/common/images/linux.png"/></a>'
+							.'<a class="winlink" href="/doc/files/common/runinlinux.php?targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'"  onclick=\'psexec(this.href); return false;\' ><img src="./images/linux.png"/></a>'
+							//.'<a class="winlink" href="/doc/files/common/runinlinux.php?targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'"  onclick=\'psexec(this.href); \' ><img src="./images/linux.png"/></a>'
 							// cygwin
-							.'<a class="winlink" href="/doc/files/common/downloadfile.php?fname=ui_run_with_cygwin.run&targetdir='.realpath($dir).'&targetfile='.$file.'&perma='.realpath("permalinux").'"><img src="/doc/files/common/images/cygwin16.png"/></a>'
+							.'<a class="winlink" href="/doc/files/common/downloadfile.php?fname=ui_run_with_cygwin.run&targetdir='.realpath($dir).'&targetfile='.$file.'&perma='.realpath("permalinux").'"><img src="./images/cygwin16.png"/></a>'
 							// add to constructor
-							.'&nbsp;<a href="/doc/files/common/copy_to_constructor.php?fname='.$file.'&targetdir='.$dir.'&urldir='.$urldir.'&host='.$host.'." onclick="javascript:void window.open(\'/doc/files/common/copy_to_constructor.php?fname='.$file.'&targetdir='.$dir.'&urldir='.$urldir.'&host='.$host.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="/doc/files/common/images/constructor.ico" title="Add this to _constructor" /></a>'
+							.'&nbsp;<a href="/doc/files/common/copy_to_constructor.php?fname='.$file.'&targetdir='.$dir.'&urldir='.$urldir.'&host='.$host.'." onclick="javascript:void window.open(\'/doc/files/common/copy_to_constructor.php?fname='.$file.'&targetdir='.$dir.'&urldir='.$urldir.'&host='.$host.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="./images/constructor.ico" title="Add this to _constructor" /></a>'
 							// add comment bull icon
-							.'&nbsp;<a id="lbulle'.$i.'" class="inline" href="/doc/files/common/downloadfile.php?fname='.($CurrOS!='Linux'?'ui_':'').'edit_this.'.($CurrOS!='Linux'?'run':'rn').'&targetdir='.realpath($dir).'&targetfile=.'.$file.'&perma='.realpath("perma").($CurrOS!='Linux'?'':'Linux').'"  ><img src="/doc/files/common/images/'.$str_bulle_icon_png.'"   '.$onmouseover.'/></a>';
+							.'&nbsp;<a id="lbulle'.$i.'" class="inline" href="/doc/files/common/downloadfile.php?fname='.($CurrOS!='Linux'?'ui_':'').'edit_this.'.($CurrOS!='Linux'?'run':'rn').'&targetdir='.realpath($dir).'&targetfile=.'.$file.'&perma='.realpath("perma").($CurrOS!='Linux'?'':'Linux').'"  ><img src="./images/'.$str_bulle_icon_png.'"   '.$onmouseover.'/></a>';
 							
 						echo '<br/>';
 						$i++;
@@ -1964,7 +1979,7 @@ if ($handle = opendir($dir)) {
 <table width="100%">
   <tr>
     <td><hr /></td>
-    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><a href="#view"><span><img src="/doc/files/common/images/eye.gif"></a>&nbsp;<img src="/doc/files/common/images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Perma commands </strong><small>(runs on Windows server)</small></td>
+    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><a href="#view"><span><img src="./images/eye.gif"></a>&nbsp;<img src="./images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Perma commands </strong><small>(runs on Windows server)</small></td>
     <td><hr /></td>
   </tr>
 </table>
@@ -1978,8 +1993,8 @@ if ($handle = opendir($dir)) {
   <tr>
     <td><hr /></td>
     <td style="width:1px; padding: 0 10px; white-space: nowrap;">
-      <a href="#view"><span><img src="/doc/files/common/images/eye.gif"></a>
-      &nbsp;<img src="/doc/files/common/images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload"  />
+      <a href="#view"><span><img src="./images/eye.gif"></a>
+      &nbsp;<img src="./images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload"  />
       &nbsp;<strong>Save clipboard </strong><small>label:</small>&nbsp;<input size="6" id="inph" onblur="updateLabel(this.value);"/></td>
     <td><hr /></td>
   </tr>
@@ -1992,7 +2007,7 @@ if ($handle = opendir($dir)) {
     }
 </script>
 
-<img src="/doc/files/common/images/copyclip.png" title="Drag and drop clipboard text in this field" style="float: left;" /><span style="float: left;">&nbsp;</span>
+<img src="./images/copyclip.png" title="Drag and drop clipboard text in this field" style="float: left;" /><span style="float: left;">&nbsp;</span>
 
 <form name="faddclip" method="get" action="/doc/files/common/addclip.php"  style="float: left;" >
 <input type="text" name="path" id="dropclip" data-clipboard-text="something" onmouseout="bindme(this.id, 1); onInputChgClip(this.value);" onblur="onInputChgClip(this.value);" size="104%" />
@@ -2006,8 +2021,8 @@ if ($handle = opendir($dir)) {
   <tr>
     <td><hr /></td>
     <td style="width:1px; padding: 0 10px; white-space: nowrap;">
-      <a href="#view"><span><img src="/doc/files/common/images/eye.gif"></a>
-      &nbsp;<img src="/doc/files/common/images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload"  />
+      <a href="#view"><span><img src="./images/eye.gif"></a>
+      &nbsp;<img src="./images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload"  />
       &nbsp;<strong>Perma batch </strong><small>PARAM1:</small>&nbsp;<input size="40" id="inpf"/></td>
     <td><hr /></td>
   </tr>
@@ -2085,14 +2100,14 @@ echo "<hr/>\n";
 <table width="100%">
   <tr>
     <td><hr /></td>
-    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><img src="/doc/files/common/images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Drag and drop url links in the box below</strong>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.links&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif" title="Edit this section"/></a>
-    <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.links");  return false;'><img src="/doc/files/common/images/text.png"/></a>
+    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><img src="./images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Drag and drop url links in the box below</strong>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.links&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif" title="Edit this section"/></a>
+    <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.links");  return false;'><img src="./images/text.png"/></a>
 	
 	</td>
     <td><hr /></td>
   </tr>
 </table>
-<img src="/doc/files/common/images/link.png" title="Drag and drop url links in this field" style="float: left;" /><span style="float: left;">&nbsp;</span>
+<img src="./images/link.png" title="Drag and drop url links in this field" style="float: left;" /><span style="float: left;">&nbsp;</span>
 <form name="faddlink" method="get" action="/doc/files/common/addlink.php" style="float: left;" >
 <input type="text" name="url" id="idfaddlink" onmouseout="onInputChg(this.value)" onblur="onInputChg(this.value)" size="200" />
 <input type="hidden" name="parent" value=<?php echo $display_link;?> />
@@ -2104,14 +2119,14 @@ echo "<hr/>\n";
 <table width="100%">
   <tr>
     <td><hr /></td>
-    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><img src="/doc/files/common/images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Make a sound alert when the following file changes</strong>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.sound&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif" title="Edit this section"/></a>
-    <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.sound");  return false;'><img src="/doc/files/common/images/text.png"/></a>
+    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><img src="./images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Make a sound alert when the following file changes</strong>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.sound&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif" title="Edit this section"/></a>
+    <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.sound");  return false;'><img src="./images/text.png"/></a>
 	</td>
     <td><hr /></td>
   </tr>
 </table>
 
-<img src="/doc/files/common/images/speaker.png" title="Drag and drop full file path in this field" style="float: left;" /><span style="float: left;">&nbsp;</span>
+<img src="./images/speaker.png" title="Drag and drop full file path in this field" style="float: left;" /><span style="float: left;">&nbsp;</span>
 <form name="faddsound" method="get" action="/doc/files/common/addsound.php" style="float: left;" >
 <input type="text" name="path" id="dropsound" onmouseout="onInputChgSound(this.value)" onblur="onInputChgSound(this.value)" size="200" />
 <input type="hidden" name="parent" value=<?php echo $display_link;?> />
@@ -2168,7 +2183,7 @@ function tick_ftime_check() {
 <table width="100%">
   <tr>
     <td><hr /></td>
-    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><img src="/doc/files/common/images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Drag and drop files in the iframe below</strong></td>
+    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><img src="./images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Drag and drop files in the iframe below</strong></td>
     <td><hr /></td>
   </tr>
 </table>
@@ -2240,30 +2255,30 @@ document.write(result);
 <hr/>
 
 <div id="fixed-div"> <!-- http://mlerman-lap/s/N  -->
-<img src="/doc/files/common/images/up.png" onclick="window.scrollTo(0, 0);" style="cursor:pointer" title="Scroll all the way up" /><br/><br/>
-<a href="#view" ><span><img src="/doc/files/common/images/eye.gif" title="Scroll to view programs"></a><br/><br/>
+<img src="./images/up.png" onclick="window.scrollTo(0, 0);" style="cursor:pointer" title="Scroll all the way up" /><br/><br/>
+<a href="#view" ><span><img src="./images/eye.gif" title="Scroll to view programs"></a><br/><br/>
 
-<a href="/doc/files/common/env.php?targetdir=<?php echo $dir; ?>" target="env" onclick="javascript:void window.open('/doc/files/common/env.php?targetdir=<?php echo $dir; ?>','1481656702602','width=1500,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/Programming-Variable-icon16.png" title="Manage environment variables" /></a><br/><br/>
+<a href="/doc/files/common/env.php?targetdir=<?php echo $dir; ?>" target="env" onclick="javascript:void window.open('/doc/files/common/env.php?targetdir=<?php echo $dir; ?>','1481656702602','width=1500,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/Programming-Variable-icon16.png" title="Manage environment variables" /></a><br/><br/>
 <script>
 var str10="";
 </script>
-<a href="/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/frequent_copy_paste/" target="chartime" onclick="javascript:void window.open('/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/frequent_copy_paste/','1481656702602','width=800,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=600,top=50');return false;"><img src="/doc/files/common/images/copyclip.png" title="frequent copy paste" onmouseover="customAlertRight(str10,'10000','50','300')" /></a>
+<a href="/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/frequent_copy_paste/" target="chartime" onclick="javascript:void window.open('/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/frequent_copy_paste/','1481656702602','width=800,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=600,top=50');return false;"><img src="./images/copyclip.png" title="frequent copy paste" onmouseover="customAlertRight(str10,'10000','50','300')" /></a>
 <div id="prevclip">none</div>
 <br/>
 
-<img src="/doc/files/common/images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" /><br/><br/>
+<img src="./images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" /><br/><br/>
 <?php
 
 if($CurrOS!="Linux")
 {
 	$dirp="perma";
 	$file="ui_total_commander.run";
-	echo '&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="/doc/files/common/images/totalcommander16.png" title="Total commander" /></a><br/><br/>';
+	echo '&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="./images/totalcommander16.png" title="Total commander" /></a><br/><br/>';
 } else
 {
 	$dirpm="permalinux";
 	$file="krusaderHere.rn";
-	echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="/doc/files/common/images/krusader16.png" title="krusader" /></a><br/><br/>';
+	echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="./images/krusader16.png" title="krusader" /></a><br/><br/>';
 }
 
 
@@ -2271,12 +2286,12 @@ if($CurrOS!="Linux")
 {
 	$dirp="perma";
 	$file="ui_copy_path_to_clipboard.run";
-	echo '&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="/doc/files/common/images/clip16.png" title="Copy path to clipboard" /></a><br/><br/>';
+	echo '&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="./images/clip16.png" title="Copy path to clipboard" /></a><br/><br/>';
 } else
 {
 	$dirpm="permalinux";
 	$file="copy_path_to_clipboard.rn";
-	echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="/doc/files/common/images/clip16.png" title="Copy path to clipboard" /></a><br/><br/>';
+	echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="./images/clip16.png" title="Copy path to clipboard" /></a><br/><br/>';
 }
 
 
@@ -2284,16 +2299,16 @@ if($CurrOS!="Linux")
 {
 	$dirp="perma";
 	$file="ui_DOS_prompt.run";
-	echo '&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="/doc/files/common/images/terminal16.png" title="DOS session" /></a><br/><br/>';
+	echo '&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="./images/terminal16.png" title="DOS session" /></a><br/><br/>';
 } else
 {
 	$dirpm="permalinux";
 	$file="openTerminal.rn";
-	echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="/doc/files/common/images/terminal16.png" title="Terminal" /></a><br/><br/>';
+	echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="./images/terminal16.png" title="Terminal" /></a><br/><br/>';
 }
 
 ?>
-<a href="#bottom"><img src="/doc/files/common/images/dn.png" title="Scroll all the way down"/></a><br/><br/>
+<a href="#bottom"><img src="./images/dn.png" title="Scroll all the way down"/></a><br/><br/>
 </div>
 
 <div id="fixed-div-top">
@@ -2318,633 +2333,633 @@ var listItemAnchors = document.getElementsByTagName('a');
 for (i = 0; i < listItemAnchors.length; i++) {
 	var s=listItemAnchors[i].innerText;
 	if(s.indexOf("layout") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/application-x-pcb-layout.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/application-x-pcb-layout.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("show_schematic") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/11172739-technical-drawing.jpg' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/11172739-technical-drawing.jpg' title='"+s+"'/>";
 	  }
 	if(s.indexOf("show_pinout") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/pinout.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/pinout.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("total_commander") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/total_commander_icon.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/total_commander_icon.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("total_commander_bin") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/total_commander_bin_icon.jpg' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/total_commander_bin_icon.jpg' title='"+s+"'/>";
 	  }
 	if(s.indexOf("total_commander_src") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/total_commander_src_icon.jpg' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/total_commander_src_icon.jpg' title='"+s+"'/>";
 	  }
 	if(s.indexOf("total_commander_rtl") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/total_commander_rtl_icon.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/total_commander_rtl_icon.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("total_commander_ftp") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/total_commander_ftp_icon.jpg' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/total_commander_ftp_icon.jpg' title='"+s+"'/>";
 	  }
 	if(s.indexOf("total_commander_cd") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/total_commander_cd.jpg' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/total_commander_cd.jpg' title='"+s+"'/>";
 	  }
 	if(s.indexOf("total_commander_remote") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/total_commander_remote.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/total_commander_remote.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("total_commander_down") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/total_commander_down.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/total_commander_down.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("Terminal") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/terminal.jpg' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/terminal.jpg' title='"+s+"'/>";
 	  }
 	if(s.indexOf("SuTerm") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/terminalRed.jpg' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/terminalRed.jpg' title='"+s+"'/>";
 	  }
 	if(s.indexOf("prompt.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/prompt.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/prompt.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("elevated_prompt") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/promptred.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/promptred.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("device_manager") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/device_manager.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/device_manager.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("mint_vm") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/mint.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/mint.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("krusaderHereUSB.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/krusader-usb.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/krusader-usb.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("krusaderHere.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/krusader.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/krusader.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("krusaderHere.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/krusader.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/krusader.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("krusader.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/krusader.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/krusader.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("krusaderHereDown.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/krusader-down.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/krusader-down.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("mntFiles") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/mnt.jpg' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/mnt.jpg' title='"+s+"'/>";
 	  }
 	if(s.indexOf("umntFiles") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/umnt.jpg' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/umnt.jpg' title='"+s+"'/>";
 	  }
 	if(s.indexOf("usbview") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/usb.jpg' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/usb.jpg' title='"+s+"'/>";
 	  }
 	if(s.indexOf("curl_remote_dir") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/curl-remote-dir.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/curl-remote-dir.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("CygwinConsole") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/cygwin.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/cygwin.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("adminCygwinConsole") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/admincygwin.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/admincygwin.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("grepWin") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/grepWin.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/grepWin.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("grepWin_input") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/grepWinInput.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/grepWinInput.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("grepWin_input_file") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/grepWinInputFile.jpg' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/grepWinInputFile.jpg' title='"+s+"'/>";
 	  }
 	if(s.indexOf("putty") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/putty.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/putty.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("kitty_cmd") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/kitty_cmd.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/kitty_cmd.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("putty_ssh") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/ssh.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/ssh.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("network.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/wired.jpg' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/wired.jpg' title='"+s+"'/>";
 	  }
 	if(s.indexOf("config_wired_10_52") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/wired10-52.jpg' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/wired10-52.jpg' title='"+s+"'/>";
 	  }
 	if(s.indexOf("config_wired_192") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/wired192-168.jpg' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/wired192-168.jpg' title='"+s+"'/>";
 	  }
 	if(s.indexOf("config_ethernet") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/wired.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/wired.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("config_ethernet_home") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/wiredhome.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/wiredhome.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("config_ethernet_work") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/wiredwork.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/wiredwork.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("config_ethernet_auto") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/wiredauto.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/wiredauto.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_upload") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/upload.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/upload.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("download.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/download.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/download.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("dbgview") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/dbgview.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/dbgview.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("notepad") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/notepad.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/notepad.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("visual_studio") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/vstudio.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/vstudio.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("visual_studio_2010") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/vsstudio2010.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/vsstudio2010.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("_dediprog") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/dediprog.jpg' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/dediprog.jpg' title='"+s+"'/>";
 	  }
 	if(s.indexOf("delete_this") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/deleteRed.jpg' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/deleteRed.jpg' title='"+s+"'/>";
 	  }
 	if(s.indexOf("show_param1") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/blank-param1.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/blank-param1.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("set_param1") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/blank-param1Input.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/blank-param1Input.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("netbeans") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/netbeans_icon.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/netbeans_icon.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("eclipse.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/eclipse.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/eclipse.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("build.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/build48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/build48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("make.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/build48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/build48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_run") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/application_run.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/application_run.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("run.sh") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/application_run.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/application_run.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("run.rn") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/application_run.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/application_run.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_rerun.run") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/application_re_run.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/application_re_run.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ai_run") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/application_run_admin.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/application_run_admin.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_run_install") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/run_install.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/run_install.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("path_to_clipboard") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/copy-path-to-clipboard.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/copy-path-to-clipboard.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("path_cygwin_to_clipboard") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/copy-path-cyg-to-clipboard.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/copy-path-cyg-to-clipboard.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("path_url_to_clipboard") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/copy-path-url-to-clipboard.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/copy-path-url-to-clipboard.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("anchor_url_to_clipboard") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/copy-anchor-url-to-clipboard.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/copy-anchor-url-to-clipboard.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("moss.micron.com") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/moss.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/moss.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("collab.micron.com") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/sharepoint.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/sharepoint.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("new_sharepoint") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/sharepoint-plus.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/sharepoint-plus.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("github_client") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/github-sociocon.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/github-sociocon.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("github.com/mlerman") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/github-sociocon.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/github-sociocon.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("github_win10lap") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/github-sociocon.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/github-sociocon.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("git_create_repo") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/github-plus.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/github-plus.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("git_download") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/github-fdown.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/github-fdown.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_force_pull") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/github-fdown.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/github-fdown.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("git_force_pullupload") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/github-up.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/github-up.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_push_to_github") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/github-up.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/github-up.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_pull_from_github") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/github-down.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/github-down.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("force_push_to_github") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/github-fup.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/github-fup.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("set_env_var") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/env-varable.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/env-varable.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("tightvnc_view") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/tightvnc.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/tightvnc.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("tightvnc_remote") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/tightvnc-remote.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/tightvnc-remote.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("stop.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/player_stop.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/player_stop.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("disk_man.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/diskman.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/diskman.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_edit_line") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/notepad-plus-plus-48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/notepad-plus-plus-48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_jump_to_with_ie") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/iexplore.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/iexplore.png' title='"+s+"'/>";
 	  }
 	  //winzip-icon.png
 	if(s.indexOf("ui_down_load_zipped") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/winzip-icon.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/winzip-icon.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("open_lan_location_with_windows_explorer_N.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/48px-Win_explorer-logo-grey_N.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/48px-Win_explorer-logo-grey_N.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("open_lan_location_with_windows_explorer_Y.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/48px-Win_explorer-logo-grey_Y.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/48px-Win_explorer-logo-grey_Y.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("open_lan_location_with_windows_explorer_I.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/48px-Win_explorer-logo-grey_I.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/48px-Win_explorer-logo-grey_I.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("open_lan_location_with_windows_explorer.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/48px-Win_explorer-logo-grey.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/48px-Win_explorer-logo-grey.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("open_lan_location_with_windows_explorer_S.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/48px-Win_explorer-logo-grey_S.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/48px-Win_explorer-logo-grey_S.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("open_lan_location_with_windows_explorer_W.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/48px-Win_explorer-logo-grey_W.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/48px-Win_explorer-logo-grey_W.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("open_lfiles_with_windows_explorer.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/48px-Win_explorer-logo-grey-lfiles.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/48px-Win_explorer-logo-grey-lfiles.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("open_ufiles_with_windows_explorer.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/48px-Win_explorer-logo-grey-ufiles.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/48px-Win_explorer-logo-grey-ufiles.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("open_H_with_chrome") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/chrome_H.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/chrome_H.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("open_lan_location_with_chrome") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/chrome.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/chrome.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_help") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/Help.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/Help.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("help.rn") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/Help.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/Help.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_move_most_recently_downl_file_to_here") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/ch.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/ch.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("version.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/version.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/version.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("i_regedit") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/regedit48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/regedit48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_crlf") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/tux_windows.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/tux_windows.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_showpdf") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/pdf48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/pdf48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_new_project_side") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/MI_CreateFolderSide.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/MI_CreateFolderSide.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_new_project_down") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/MI_CreateFolderDown.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/MI_CreateFolderDown.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("winscp.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/winscp.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/winscp.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("everything_input") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/everythingInput.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/everythingInput.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("test.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/playredtest.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/playredtest.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("hctosys.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/clock.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/clock.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("paint.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/paint.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/paint.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("gimp.rn") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/paint.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/paint.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("word.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/dwr_48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/dwr_48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("powerpoint.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/powerpoint.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/powerpoint.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("video_capture_screen.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/video.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/video.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_network_connection_adapter.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/network.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/network.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_jotty.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/malware.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/malware.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("bin_edit.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/binedit.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/binedit.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("convert_dos_to_linux.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/win2lin.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/win2lin.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_convert_linux_to_dos.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/lin2win.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/lin2win.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("systemMonitor.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/graph48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/graph48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_rename_file_no_spaces.run") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/underscore.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/underscore.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_services.run") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/services.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/services.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_stop_CISCO_VPN_service.run") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/killciscovpn.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/killciscovpn.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_start_CISCO_VPN_service.run") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/ciscovpn.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/ciscovpn.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_powershell.run") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/powershell.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/powershell.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_put_next.run") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/Arrownext48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/Arrownext48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_process_explorer.run") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/graph48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/graph48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_jump_to_jira.run") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/jira48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/jira48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_open_jira.run") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/jira48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/jira48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_minimenu_always_on_top.run") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/minib.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/minib.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_archive.run") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/archive48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/archive48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("reset_processor.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/Reset_button48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/Reset_button48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("open_jtagterminal_debug") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/jtagterminal.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/jtagterminal.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_XSCT_Xilinx_Software_command_line_tool") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/xsctterminal.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/xsctterminal.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("resume.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/media-play-resume.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/media-play-resume.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("suspend.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/media-play-pause.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/media-play-pause.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("ui_add_readme") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/readme.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/readme.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("nxt.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/next-step.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/next-step.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("stpout.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/ret.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/ret.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("dis.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/asm.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/asm.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("open_google_drive") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/Google-Drive-48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/Google-Drive-48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("edit_environment_variable.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/variable.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/variable.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("hw_server.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/hw.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/hw.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("vivado.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/vivado.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/vivado.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("vivado_tcl.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/vivado_tcl.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/vivado_tcl.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("launch_script.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/script.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/script.png' title='"+s+"'/>";
 	  }
 ////////////  
 	if(s.indexOf("showFiles.rn") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/ln-files.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/ln-files.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("share_files.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/sharedir.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/sharedir.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("bashdb.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/bug48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/bug48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("vcs_gui.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/vcs.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/vcs.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("push_files.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/copyover48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/copyover48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("codecompare.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/codecompare.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/codecompare.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("remove.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/remove.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/remove.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("open_review.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/smartbear.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/smartbear.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("Y_drive.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/monitor_Y_48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/monitor_Y_48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("I_drive.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/monitor_I_48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/monitor_I_48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("L_drive.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/monitor_L_48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/monitor_L_48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("W_drive.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/monitor_W_48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/monitor_W_48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("N_drive.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/monitor_N_48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/monitor_N_48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("S_drive.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/monitor_S_48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/monitor_S_48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("H_drive.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/monitor_H_48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/monitor_H_48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("_next.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/gtk-go-back-rtl.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/gtk-go-back-rtl.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("_from_jira.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/jira48down.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/jira48down.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("clean_") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/clean.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/clean.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("Hemmati") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/sarvineh.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/sarvineh.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("Sherry_Wang") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/sherrywang.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/sherrywang.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("Anosh_Mohammed") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/anosh.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/anosh.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("Mark_Liu") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/markliu.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/markliu.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("Henry_Chung") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/Henry_Chung.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/Henry_Chung.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("Gerald_Logoteta") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/Gerald_Logoteta.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/Gerald_Logoteta.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("Basavaraj_Masarakal") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/Basavaraj_Masarakal.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/Basavaraj_Masarakal.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("Kunal_Shenoy") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/Kunal_Shenoy.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/Kunal_Shenoy.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("Ramesh_Mangamuri") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/Ramesh_Mangamuri.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/Ramesh_Mangamuri.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("Patrick_Turner") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/Patrick_Turner.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/Patrick_Turner.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("Shrikant_Shukla") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/Shrikant_Shukla.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/Shrikant_Shukla.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("Kuldeep_Bhadoria") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/Kuldeep_Bhadoria.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/Kuldeep_Bhadoria.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("AstroGrep") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/astrogrep.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/astrogrep.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("view_log.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/glogg.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/glogg.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("move_jira_emails.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/jira48_remove.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/jira48_remove.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("config.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/configure.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/configure.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("force_CQ_only.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/cq_only.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/cq_only.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("DOS_web.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/promptconsole.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/promptconsole.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("apache_error.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/apachelogo.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/apachelogo.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("xming.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/Xming.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/Xming.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("t32_xming.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/t32.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/t32.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("RIS.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/ris.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/ris.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("scan_far.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/scan.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/scan.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("query_far.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/query.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/query.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("RAID_0.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/raid48_0.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/raid48_0.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("RAID_5.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/raid48_5.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/raid48_5.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("show_far.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/eye48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/eye48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("clear_config_far.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/clear.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/clear.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("uart_far.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/uart.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/uart.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf(".kitty.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/kitty.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/kitty.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("kitty_run.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/kitty.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/kitty.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("sync.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/FreeFileSync48.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/FreeFileSync48.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("source_insight.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/source_insight.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/source_insight.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("email_shipped.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/email_shipped.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/email_shipped.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("relance.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/overdue.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/overdue.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("estimate.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/estimate.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/estimate.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("cart_str_to_order.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/insert_db.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/insert_db.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("robot.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/robot.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/robot.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("FPExpress.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/FPExpress.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/FPExpress.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("SoftConsole.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/SoftConsole.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/SoftConsole.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("Libero.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/Libero.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/Libero.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("MSS_Configurator.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/MSS.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/MSS.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("mtPutty.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/mtputty.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/mtputty.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("category.r") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/category.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/category.png' title='"+s+"'/>";
 	  }
 	if(s.indexOf("unzip_") > -1) {
-	  listItemAnchors[i].innerHTML="<img src='/doc/files/common/images/winzip-icon-original.png' title='"+s+"'/>";
+	  listItemAnchors[i].innerHTML="<img src='./images/winzip-icon-original.png' title='"+s+"'/>";
 	  }
 }
 
@@ -3146,15 +3161,15 @@ function openOnceTest(url, target, file){
     <a nohref="" onclick="testIce();" style="cursor: pointer">testIce()</a><br/><br/><br/>
 
 
-<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/eXtplorer2-1-15/config/.htusers.php");  return false;'><img src="/doc/files/common/images/text.png" title="mntFiles.rn"/></a>&nbsp; 
-<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/permalinux/mntFiles.rn");  return false;'><img src="/doc/files/common/images/text.png" title="mntFiles.rn"/></a>&nbsp; 
-<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/open-command-prompt-here.html");  return false;'><img src="/doc/files/common/images/text.png" title="open-command-prompt-here.html"/></a>&nbsp; 
-<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/downloadfile.php");  return false;'><img src="/doc/files/common/images/text.png" title="downloadfile.php"/></a>&nbsp; 
-<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/instantedithead.js");  return false;'><img src="/doc/files/common/images/text.png" title="instantedithead.js"/></a>&nbsp; 
-<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/updatehead.php");  return false;'><img src="/doc/files/common/images/text.png" title="updatehead.php"/></a>&nbsp; 
-<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/viewfile/viewdos.php");  return false;'><img src="/doc/files/common/images/text.png" title="viewdos.php"/></a>&nbsp; 
-<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/write_ckfile.php");  return false;'><img src="/doc/files/common/images/text.png" title="write_ckfile.php"/></a>&nbsp; 
-<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/psexec.php");  return false;'><img src="/doc/files/common/images/text.png" title="psexec.php"/></a>&nbsp; 
+<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/eXtplorer2-1-15/config/.htusers.php");  return false;'><img src="./images/text.png" title="mntFiles.rn"/></a>&nbsp; 
+<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/permalinux/mntFiles.rn");  return false;'><img src="./images/text.png" title="mntFiles.rn"/></a>&nbsp; 
+<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/open-command-prompt-here.html");  return false;'><img src="./images/text.png" title="open-command-prompt-here.html"/></a>&nbsp; 
+<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/downloadfile.php");  return false;'><img src="./images/text.png" title="downloadfile.php"/></a>&nbsp; 
+<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/instantedithead.js");  return false;'><img src="./images/text.png" title="instantedithead.js"/></a>&nbsp; 
+<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/updatehead.php");  return false;'><img src="./images/text.png" title="updatehead.php"/></a>&nbsp; 
+<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/viewfile/viewdos.php");  return false;'><img src="./images/text.png" title="viewdos.php"/></a>&nbsp; 
+<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/write_ckfile.php");  return false;'><img src="./images/text.png" title="write_ckfile.php"/></a>&nbsp; 
+<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/psexec.php");  return false;'><img src="./images/text.png" title="psexec.php"/></a>&nbsp; 
 <iframe id="other" src="/doc/files/common/othersites.php?urldir=<?php echo $urldir; ?>" />
 <br/><br/><br/>
 
