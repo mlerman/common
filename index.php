@@ -29,7 +29,9 @@ $onmouseover='';    // TODO previent erreur avec wampserver, a revoir
 $param1='';
 $link =  "//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 echo 'link est '.$link.'<br/>';
-$linkip =  "//$_SERVER[SERVER_ADDR]$_SERVER[REQUEST_URI]";
+//$linkip =  "//$_SERVER[SERVER_ADDR]$_SERVER[REQUEST_URI]";
+$linkip =  "//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+echo 'linkip est '.$linkip.'<br/>';
 $hostname=gethostname();
 $linkname =  "//$hostname$_SERVER[REQUEST_URI]";
 
@@ -114,77 +116,9 @@ if ($mac=="mac") echo "<img src='./images/osx.png' title='You are running Androi
 if (($CurrOS=="Windows 7")||($CurrOS=="Windows 10")) echo "<img src='./images/Windows16.png' title='You are running Windows 7'>&nbsp;";
 //echo "HTTP_USER_AGENT is ".$_SERVER['HTTP_USER_AGENT']."<br/>";
 
-/**
- * Creates function imagecreatefrombmp, since PHP doesn't have one
- * @return resource An image identifier, similar to imagecreatefrompng
- * @param string $filename Path to the BMP image
- * @see imagecreatefrompng
- * @author Glen Solsberry <glens@networldalliance.com>
- */
-if (!function_exists("imagecreatefrombmp")) {
-	function imagecreatefrombmp( $filename ) {
-		$file = fopen( $filename, "rb" );
-		$read = fread( $file, 10 );
-		while( !feof( $file ) && $read != "" )
-		{
-			$read .= fread( $file, 1024 );
-		}
-		$temp = unpack( "H*", $read );
-		$hex = $temp[1];
-		$header = substr( $hex, 0, 104 );
-		$body = str_split( substr( $hex, 108 ), 6 );
-		if( substr( $header, 0, 4 ) == "424d" )
-		{
-			$header = substr( $header, 4 );
-			// Remove some stuff?
-			$header = substr( $header, 32 );
-			// Get the width
-			$width = hexdec( substr( $header, 0, 2 ) );
-			// Remove some stuff?
-			$header = substr( $header, 8 );
-			// Get the height
-			$height = hexdec( substr( $header, 0, 2 ) );
-			unset( $header );
-		}
-		$x = 0;
-		$y = 1;
-		$image = imagecreatetruecolor( $width, $height );
-		foreach( $body as $rgb )
-		{
-			$r = hexdec( substr( $rgb, 4, 2 ) );
-			$g = hexdec( substr( $rgb, 2, 2 ) );
-			$b = hexdec( substr( $rgb, 0, 2 ) );
-			$color = imagecolorallocate( $image, $r, $g, $b );
-			imagesetpixel( $image, $x, $height-$y, $color );
-			$x++;
-			if( $x >= $width )
-			{
-				$x = 0;
-				$y++;
-			}
-		}
-		return $image;
-	}
-}
 
 $no_favicon=false;
-if (!copy($dir.'/favicon.ico', $dir.'/favicon.bmp')) {
-	$no_favicon=true;
-} else {
-  $im = imagecreatefrombmp($dir.'/favicon.bmp');
-
-  if($im && imagefilter($im, IMG_FILTER_BRIGHTNESS, 222))
-  {
-    //echo 'Image converted to grayscale.';
-    imagepng($im, $dir.'/favicon.bmp');
-  }
-  else
-  {
-    echo 'Image conversion failed.';
-  }
-
-  imagedestroy($im);
-}
+echo '<br/>'.$dir.'/favicon.ico'.'<br/>';
 
 
 if (file_exists ( $dir.'/get_param1.bat' ))
@@ -1397,7 +1331,6 @@ alert(  'current : ' + window.name
       + ' \n$_SERVER["REQUEST_URI"] : <?php echo $_SERVER["REQUEST_URI"]?>'
       + ' \n$_GET["reqfname"] : <?php echo $_SERVER["reqfname"]?> (.htaccess)'
       + ' \n$_GET["requri"] : <?php echo $_SERVER["requri"]?> (.htaccess)'
-      + ' \nserver IP : <?php echo $_SERVER['SERVER_ADDR']?>'
 	  //
       + ' \nwindow.screen.availHeight : ' + window.screen.availHeight
       + ' \nwindow.screen.availWidth : ' + window.screen.availWidth
