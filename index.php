@@ -146,8 +146,9 @@ if (file_exists ( $dir.'/get_feu.bat' ))
 
 <!-- testing to see if the other icon shows - no ! -->
 <link rel="icon" href="/doc/test/favicon.ico?v=<?php echo time() ?>" type="image/x-icon"/>
-
+<!--
 <script type="text/javascript" src="/doc/files/common/instantedithead.js"></script> 
+-->
 <script src="/doc/files/common/jquery.min.js"></script>
 <script type="text/javascript" src="/doc/files/common/tipped/tipped.js"></script>
 <link rel="stylesheet" type="text/css" href="/doc/files/common/tipped/tipped.css" />
@@ -924,6 +925,7 @@ function get_client_ip() {
     return $ipaddress;
 }
 
+/*
 $notrack=@file_get_contents($proj_dir."/.cknotrack");
 
 		// read last line of .time
@@ -933,12 +935,12 @@ $timestamp=0;
 if($notrack!="checked")
   {
   $file = fopen($proj_dir."/.time","a+");
-  while(! feof($file))
+  while(0)
     {
     $timeFromFileLast=$timeFromFile;
     $timeFromFile= fgets($file);
     }
-  fclose($file);
+//  fclose($file);
 
   if (strpos($timeFromFileLast,'NaN') != false) {
       echo "NaN issue<br/>\n";
@@ -966,7 +968,7 @@ if($notrack!="checked")
       unlink($proj_dir."/.time");
       }
   }
-
+*/
 ?>
 
 <script>
@@ -982,15 +984,15 @@ if($notrack=="checked") {
 
 ?>
 
+<!--
 //alert(notrack);
-
 var time,timeSite;
 window.onload=function(){
  time=new Date();
 
  //alert("time="+time);
 }
-
+-->
 
 
 
@@ -2102,12 +2104,13 @@ var xmlhttp_filechange = new XMLHttpRequest();
 	}
 
 
-
-setInterval(tick_ftime_check, 1500);
-function tick_ftime_check() {
-	xmlhttp_filechange.open("GET","/doc/files/common/filechange.php?target=<?php echo $path_sound;?>");
-	xmlhttp_filechange.send();
-}
+<!--
+//setInterval(tick_ftime_check, 1500);
+//function tick_ftime_check() {
+//	xmlhttp_filechange.open("GET","/doc/files/common/filechange.php?target=<?php echo $path_sound;?>");
+//	xmlhttp_filechange.send();
+//}
+-->
 </script>
 
 
@@ -2121,9 +2124,9 @@ function tick_ftime_check() {
   </tr>
 </table>
 
-
+<!--
 <iframe src="/doc/upload/index.html?dir=<?php echo $dir_loc; ?>" width="100%" height="600px" ></iframe>
-										  
+-->										  
 										  
 <div id="message5sec" >
 <script>
@@ -2260,7 +2263,7 @@ function adjustWindow(){  // not used not working
 }
 
 //ml: http://mlerman-lap/s/19
-
+/*
 var listItemAnchors = document.getElementsByTagName('a');
 //ml icons
 for (i = 0; i < listItemAnchors.length; i++) {
@@ -2895,7 +2898,7 @@ for (i = 0; i < listItemAnchors.length; i++) {
 	  listItemAnchors[i].innerHTML="<img src='./images/winzip-icon-original.png' title='"+s+"'/>";
 	  }
 }
-
+*/
 for (i = 0; i < listItemAnchors.length; i++) {
 	var s=listItemAnchors[i].innerText;
 	if(s.indexOf("ui_jump_to") == 0) {
