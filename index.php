@@ -289,7 +289,7 @@ iframe {
 }
 
 .run_box + label{
-    background:url('./images//run-unchecked.png') no-repeat;
+    background:url('../images/run-unchecked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -301,7 +301,7 @@ iframe {
 }
 
 .run_box:checked + label{
-    background:url('./images//run-checked.png') no-repeat;
+    background:url('../images/run-checked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -321,7 +321,7 @@ iframe {
 }
 
 .hlp_box + label{
-    background:url('./images//help-unchecked.png') no-repeat;
+    background:url('../images/help-unchecked.png') no-repeat;
     height: 16px;
     width: 17px;
     display:inline-block;
@@ -1349,8 +1349,8 @@ alert(  'current : ' + window.name
 <?php echo $prjname; ?>
 &nbsp;<span id="copy-button-2" data-clipboard-text="<?php echo $prjname; ?>" title="copy project name to clipboard" onmouseover="this.style.backgroundColor = 'white'" onclick='bindme(this.id, 0);'><img src="./images/copyclip.png"/></span>
 &nbsp;<a href="/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/d3_directed_graph/project_graph.php?target=<?php echo $urldir; ?>" onclick="javascript:void window.open('/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/d3_directed_graph/project_graph.php?target=<?php echo $urldir; ?>','1481602525735','width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');return false;" ><img src="./images/digraph.gif" /></a>
-&nbsp;<span onclick="debug();"><img src=./images//debug.png /></span>
-&nbsp;<span onclick="adjust_target();" id="animreload" style="display:none"><img src=./images//loader_grayblue.gif /></span>
+&nbsp;<span onclick="debug();"><img src=../images/debug.png /></span>
+&nbsp;<span onclick="adjust_target();" id="animreload" style="display:none"><img src=../images/loader_grayblue.gif /></span>
 
 <script>
 
@@ -2127,7 +2127,7 @@ var xmlhttp_filechange = new XMLHttpRequest();
 <!--
 <iframe src="/doc/upload/index.html?dir=<?php echo $dir_loc; ?>" width="100%" height="600px" ></iframe>
 -->										  
-										  
+<!--										  
 <div id="message5sec" >
 <script>
 var w=window.innerWidth;
@@ -2137,6 +2137,7 @@ else
 document.write("<span style=\"color:green\">OK thx</span>");
 </script>
 </div>
+-->
 
 <table width="100%">
   <tr>
@@ -2263,7 +2264,7 @@ function adjustWindow(){  // not used not working
 }
 
 //ml: http://mlerman-lap/s/19
-/*
+
 var listItemAnchors = document.getElementsByTagName('a');
 //ml icons
 for (i = 0; i < listItemAnchors.length; i++) {
@@ -2898,7 +2899,7 @@ for (i = 0; i < listItemAnchors.length; i++) {
 	  listItemAnchors[i].innerHTML="<img src='./images/winzip-icon-original.png' title='"+s+"'/>";
 	  }
 }
-*/
+
 for (i = 0; i < listItemAnchors.length; i++) {
 	var s=listItemAnchors[i].innerText;
 	if(s.indexOf("ui_jump_to") == 0) {
@@ -3091,7 +3092,8 @@ function openOnceTest(url, target, file){
 }
 // ICECODER_TESTING
 </script>
-
+<!-- ici hyper activity de la page -->
+<!--
 	<a nohref="" onclick='openOnceTest("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor","/doc/files/common/ui_test.run");' style="cursor: pointer">openOnceTest()</a><br/>
 	<a nohref="" onclick="edit_with_icecoder('/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/', 'editor', 'c:/UniServer/www/doc/files/common/', 'open-command-prompt-here.html', 'ICECODER_TESTING');" style="cursor: pointer">edit_with_icecoder()</a><br/>
     <a nohref="" onclick="testIce();" style="cursor: pointer">testIce()</a><br/><br/><br/>
@@ -3106,10 +3108,12 @@ function openOnceTest(url, target, file){
 <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/viewfile/viewdos.php");  return false;'><img src="./images/text.png" title="viewdos.php"/></a>&nbsp; 
 <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/write_ckfile.php");  return false;'><img src="./images/text.png" title="write_ckfile.php"/></a>&nbsp; 
 <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/psexec.php");  return false;'><img src="./images/text.png" title="psexec.php"/></a>&nbsp; 
-<iframe id="other" src="/doc/files/common/othersites.php?urldir=<?php echo $urldir; ?>" />
-<br/><br/><br/>
+-->
 
-<!--/ tototititutu /-->
+
+<!--
+<iframe id="other" src="/doc/files/common/othersites.php?urldir=<?php echo $urldir; ?>" />
+-->
 </body>
 </html>
 <!--//-->
