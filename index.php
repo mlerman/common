@@ -4,8 +4,12 @@ $files_path = file_get_contents(getcwd().'\core_settings\FILES_PATH.sh.bat');
 echo '<br/>';
 echo 'on est dans ' . getcwd() . "\n";
 echo '<br/>';
+$dir =  getcwd();
+$files_path = str_replace("\\", "/", $dir);
+
 $files_path = str_replace("set FILES_PATH=", "", $files_path);
 $files_path = str_replace("\\", "/", $files_path);
+$dir = $files_path;
 // remove trailing slash
 $files_path = rtrim($files_path, '/');
 echo 'FILES_PATH est ' . $files_path;  // example C:/UniServer/www/doc/files
@@ -28,40 +32,56 @@ echo '<br/>';
 $onmouseover='';    // TODO previent erreur avec wampserver, a revoir
 $param1='';
 $link =  "//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-echo 'link est '.$link.'<br/>';
+echo 'link est '.$link.'<br/>';		//ml //siliconkit.com/doc/files/common/open-command-prompt-here.html
 //$linkip =  "//$_SERVER[SERVER_ADDR]$_SERVER[REQUEST_URI]";
 $linkip =  "//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-echo 'linkip est '.$linkip.'<br/>';
+echo 'linkip est '.$linkip.'<br/>';	//ml  linkip est //192.168.1.72/doc/files/common/open-command-prompt-here.html
+
 $hostname=gethostname();
 $linkname =  "//$hostname$_SERVER[REQUEST_URI]";
+echo 'linkname '.$linkname.'<br/>';		//ml  linkname //DESKTOP-MCQS4FT/doc/files/common/open-command-prompt-here.html
 
 //   //mlerman-lap/doc/files/Engineering/ENVIRONMENT/NODE/fill_sd_ajax/open-command-prompt-here.html
 $escaped_link = htmlspecialchars($link, ENT_QUOTES, 'UTF-8');
+echo 'escaped_link '.$escaped_link.'<br/>';		//ml  escaped_link //siliconkit.com/doc/files/common/open-command-prompt-here.html
+
+
 $pos=strpos($escaped_link,"/doc/files");
 //   //mlerman-lap/doc/files/Engineering/ENVIRONMENT/NODE/fill_sd_ajax/open-command-prompt-here.html
 //                ^ = 13                                              ^ = -30
 $dir_loc=substr($escaped_link, $pos, -30);
+echo 'dir_loc '.$dir_loc.'<br/>';		//ml  dir_loc /doc/files/common
+
 $id_link=substr($escaped_link, 23);
+echo 'id_link '.$id_link.'<br/>';		//ml  id_link les/common/open-command-prompt-here.html
+
 $escaped_link_cut=substr($escaped_link,0,-29);
+echo 'escaped_link_cut '.$escaped_link_cut.'<br/>';  //ml  escaped_link_cut //siliconkit.com/doc/files/common/
+
+
 $display_link=$escaped_link_cut;
 $pos=strpos($escaped_link_cut,"/doc/files");
 $host=$_SERVER['HTTP_HOST'];
+echo 'host '.$host.'<br/>';
 $urldir=substr($display_link, $pos);
+echo 'urldir '.$urldir.'<br/>';
 $display_link=substr($display_link, $pos+10);
+echo 'display_link '.$display_link.'<br/>';		//ml  display_link /common/
 
-//$dir=     substr($_GET["reqfname"], 0, strrpos($_GET["reqfname"], "/"));
-$dir=$files_path.substr($display_link, 0, -1);
 
-$dir=str_replace("%60","`",$dir);
-//echo "dir is ".$dir;
+echo "dir is ".$dir.'<br/>';   //ml  dir is C:/UniServer/www/doc/files/common
+
 
 //$proj_dir=substr($_GET["reqfname"], 0, strrpos($_GET["reqfname"], "/"));
 $proj_dir=$dir;
 $proj_dir_lin=str_replace("C:/UniServer/www/doc/","/home/user/",$proj_dir);
+echo "proj_dir_lin is ".$proj_dir_lin.'<br/>';		//ml   proj_dir_lin is /home/user/files/common
 
 
 
 $urldirpapa=substr($urldir,0, strrpos(substr($urldir,0,-1),"/"));
+echo "urldirpapa is ".$urldirpapa.'<br/>';		//ml   urldirpapa is /doc/files
+
 
 $clienthost = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 //$clienthost = "mlerman-lap";		// hack temporaire
@@ -70,6 +90,9 @@ $clienthost = strtolower($clienthost);
 
 $pos=strrpos($dir, "/");
 $prjname=substr($dir, $pos+1);
+echo "prjname is ".$prjname.'<br/>';		//ml   prjname is common
+
+
 
 // let see here if there is a file autoexec.bat and run it
 if (file_exists($dir."/autoexec.bat")) {
@@ -1318,6 +1341,7 @@ window.open('<?php echo $urldir; ?>open-command-prompt-here.html','<?php echo $p
 
 function debug()
 {
+
 alert(  'current : ' + window.name 
       + ' \n$prjname : <?php echo $prjname?>'
       + ' \n$link : <?php echo $link?>'
@@ -1331,17 +1355,19 @@ alert(  'current : ' + window.name
       + ' \n$urldirpapa : <?php echo $urldirpapa?>'
       + ' \n$_SERVER["HTTP_HOST"] : <?php echo $_SERVER["HTTP_HOST"]?>'
       + ' \n$_SERVER["REQUEST_URI"] : <?php echo $_SERVER["REQUEST_URI"]?>'
-      + ' \n$_GET["reqfname"] : <?php echo $_SERVER["reqfname"]?> (.htaccess)'
-      + ' \n$_GET["requri"] : <?php echo $_SERVER["requri"]?> (.htaccess)'
-	  //
       + ' \nwindow.screen.availHeight : ' + window.screen.availHeight
       + ' \nwindow.screen.availWidth : ' + window.screen.availWidth
+	  );
+/*
+    //  + ' \n$_GET["reqfname"] : <?php echo $_SERVER["reqfname"]?> (.htaccess)'
+    //  + ' \n$_GET["requri"] : <?php echo $_SERVER["requri"]?> (.htaccess)'
+	  //
       //+ ' \nICEcoderWin.global_var : ' + ICEcoderWin.global_var	// ca ne marche pas, ICEcoderWin est undefined
 	  
 	  );
 	  //call a function fron editor.php if defined
 	  //ICEcoderWin.editor_php_func();
-	  
+*/
 }
 
 </script>
@@ -1353,7 +1379,6 @@ alert(  'current : ' + window.name
 &nbsp;<span onclick="adjust_target();" id="animreload" style="display:none"><img src=../images/loader_grayblue.gif /></span>
 
 <script>
-
 var prjname="<?php echo $prjname; ?>";
 
 <?php 
