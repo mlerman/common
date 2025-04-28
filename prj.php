@@ -106,7 +106,7 @@ if (file_exists($dir."/autoexec.bat")) {
 $icon_run="";
 if (file_exists("/UniServer/www".$dir_loc."/ui_run.run")) {
 	//echo "<script>alert('".$dir_loc."');</script>";
-	$icon_run="<a href='/doc/files/common/downloadfile.php?fname=ui_run.run&targetdir=/UniServer/www".$dir_loc."&admin=0'><img src='./images/Play-1-Hot-icon.png'/></a>";
+	$icon_run="<a href='downloadfile.php?fname=ui_run.run&targetdir=/UniServer/www".$dir_loc."&admin=0'><img src='./images/Play-1-Hot-icon.png'/></a>";
 }
 
 include 'oslist.php';
@@ -172,10 +172,10 @@ if (file_exists ( $dir.'/get_feu.bat' ))
 <!--
 <script type="text/javascript" src="/doc/files/common/instantedithead.js"></script> 
 -->
-<script src="/doc/files/common/jquery.min.js"></script>
-<script type="text/javascript" src="/doc/files/common/tipped/tipped.js"></script>
-<link rel="stylesheet" type="text/css" href="/doc/files/common/tipped/tipped.css" />
-<script src="/doc/files/common/clipboard.js/dist/clipboard.min.js"></script>
+<script src="jquery.min.js"></script>
+<script type="text/javascript" src="tipped/tipped.js"></script>
+<link rel="stylesheet" type="text/css" href="tipped/tipped.css" />
+<script src="clipboard.js/dist/clipboard.min.js"></script>
 
 
 
@@ -1074,7 +1074,7 @@ if(isNaN(total)) totalIsNan=true;
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");        //Open a different type of ajax call.
         }
 		if(!isNaN(total)) {
-			var url = "/doc/files/common/time.php?target=<?php echo $proj_dir."/.time"; ?>&time="+total;        //Send the time on the page to a php script of your choosing.
+			var url = "time.php?target=<?php echo $proj_dir."/.time"; ?>&time="+total;        //Send the time on the page to a php script of your choosing.
 			xmlhttp.open("GET",url,false);        //The false at the end tells ajax to use a synchronous call which wont be severed by the user leaving.
 			xmlhttp.send(null);        //Send the request and don't wait for a response.
 			}
@@ -1263,21 +1263,21 @@ if($CurrOS!="Linux")
 {
   $dirp="perma";
   $file="ui_total_commander.run";
-  echo '&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="./images/totalcommander16.png" title="Total commander" /></a>';  
+  echo '&nbsp;<a class="winlink" href="downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="./images/totalcommander16.png" title="Total commander" /></a>';  
 } else
 {
 	$dirpm="permalinux";
 	$file="krusaderHere.rn";
-	echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="./images/krusader16.png" title="krusader" /></a>';
+	echo '<a class="linuxlink" href="downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="./images/krusader16.png" title="krusader" /></a>';
 }
 ?>
 <!-- top links http://mlerman-lap/s/O -->
 &nbsp;<a href="http://<?php echo $clienthost; ?>/doc/elfinder.html" id="homelink" target="elfinder"><img src="./images/home.png" title="Go to <?php echo $clienthost; ?> elfinder" id="hometitle" /></a>&nbsp;
-&nbsp;<a href="/doc/files/common/zipfolder.php?fname=<?php echo $prjname; ?>&targetdir=<?php echo realpath($dir); ?>&debug=12345678"><img src="./images/compress-icon.png" title="Download this folder zipped"/></a>&nbsp;
+&nbsp;<a href="zipfolder.php?fname=<?php echo $prjname; ?>&targetdir=<?php echo realpath($dir); ?>&debug=12345678"><img src="./images/compress-icon.png" title="Download this folder zipped"/></a>&nbsp;
 <!--
 &nbsp;<a href="/doc/files/common/env.php&targetdir=<?php echo $dir; ?>" target="env" onclick="javascript:void window.open('/doc/files/common/env.php?targetdir=<?php echo $dir; ?>','1481656702602','width=1500,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/Programming-Variable-icon16.png" title="Manage environment variables" /></a>
 -->
-&nbsp;<a href="/doc/files/common/env.php&targetdir=<?php echo $dir; ?>" target="env" onclick="javascript:void window.open('/doc/files/common/frename.php?targetdir=<?php echo $dir; ?>','1481656702602','width=800,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/Programming-Variable-icon16.png" title="Manage file names" /></a>
+&nbsp;<a href="env.php&targetdir=<?php echo $dir; ?>" target="env" onclick="javascript:void window.open('frename.php?targetdir=<?php echo $dir; ?>','1481656702602','width=800,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/Programming-Variable-icon16.png" title="Manage file names" /></a>
 &nbsp;<a href="http://<?php echo $clienthost.$dir_loc; ?>/../_constructor/open-command-prompt-here.html" target="_constructor"><img src="./images/constructor.ico" title="Go to _constructor" /></a>&nbsp;
 &nbsp;<a href="/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/frequent_copy_paste/" target="chartime" onclick="javascript:void window.open('/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/frequent_copy_paste/','1481656702602','width=800,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/copyclip.png" title="frequent copy paste" /></a>
 &nbsp;<a href="/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/Codiad/?name=<?php echo $prjname; ?>&path=<?php echo $proj_dir; ?>" target="codiad" onclick="javascript:void window.open('/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/Codiad/?name=<?php echo $prjname; ?>&path=<?php echo $proj_dir; ?>','1481656702602','width=800,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/codiad16.png" title="CODIAD editor" /></a>
@@ -1293,7 +1293,7 @@ if (file_exists($dir."/.code")) {
   } 
 ?>
 
-&nbsp;<a href="/doc/files/common/env.php&targetdir=C:/UniServer/www/doc/files/common/global_settings" target="env" onclick="javascript:void window.open('/doc/files/common/env.php?targetdir=C:/UniServer/www/doc/files/common/global_settings','1481656702602','width=1800,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/Programming-Variable-icon16.png" title="Manage environment variables" /></a>
+&nbsp;<a href="env.php&targetdir=C:/UniServer/www/doc/files/common/global_settings" target="env" onclick="javascript:void window.open('env.php?targetdir=C:/UniServer/www/doc/files/common/global_settings','1481656702602','width=1800,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/Programming-Variable-icon16.png" title="Manage environment variables" /></a>
 <!--
 &nbsp;<a href="https://confluence.microchip.com/pages/viewpage.action?pageId=319526555" target="confluence" onclick="javascript:void window.open('https://confluence.microchip.com/pages/viewpage.action?pageId=319526555','1481656702602','width=1100,height=700,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;">ML</a>
 -->
@@ -1305,17 +1305,17 @@ if (file_exists($dir."/.code")) {
 <fieldset style="float: left;">
 
 <fieldset style="float: left;">
-<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.previous&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>" ><img src="./images/notepad-plus-plus.gif"/></a>
+<legend>&nbsp;<a href="downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.previous&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>" ><img src="./images/notepad-plus-plus.gif"/></a>
         <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.previous");  return false;'><img src="./images/text.png"/></a>
-              <a href="/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePagePrevious" target="pickf" onclick="javascript:void window.open('/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePagePrevious','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/add_file.png"/></a>
+              <a href="jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePagePrevious" target="pickf" onclick="javascript:void window.open('jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePagePrevious','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/add_file.png"/></a>
         &nbsp;<img src="./images/Arrowprevious48.png"/> 
 </legend>
 <?php echo @file_get_contents($proj_dir."/.previous"); ?>
 </fieldset>
 <fieldset>
-<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.next&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif"/></a>
+<legend>&nbsp;<a href="downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.next&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif"/></a>
         <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.next");  return false;'><img src="./images/text.png"/></a>
-              <a href="/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePageNext" target="pickf" onclick="javascript:void window.open('/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePageNext','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/add_file.png"/></a>
+              <a href="jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePageNext" target="pickf" onclick="javascript:void window.open('jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePageNext','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/add_file.png"/></a>
         &nbsp;<img src="./images/Arrownext48.png"/> 
 </legend>
 <?php echo @file_get_contents($proj_dir."/.next"); ?>
@@ -1394,18 +1394,18 @@ if($param1!="") echo "\";";
 
 <fieldset style="float: left;">
 <legend>Attribute: </legend>
-<input type="checkbox" name=".ckbuild" <?php echo @file_get_contents($proj_dir."/.public"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.public"; ?>&value='+this.checked, function(text){ show_write(text)});"> Public<br/>
-<input type="checkbox" name=".ckbuild" <?php echo @file_get_contents($proj_dir."/.core"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.core"; ?>&value='+this.checked, function(text){ show_write(text)});"> Core<br/>
-<input type="checkbox" name=".ckbuild" <?php echo @file_get_contents($proj_dir."/.lfiles"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.lfiles"; ?>&value='+this.checked, function(text){ show_write(text)});"> lfiles<br/>
-<input type="checkbox" name=".ckpfunc" <?php echo @file_get_contents($proj_dir."/.ckpfunc"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckpfunc"; ?>&value='+this.checked, function(text){ show_write(text)});"> Experimental<br/>
-<input type="checkbox" name=".ckffunc" <?php echo @file_get_contents($proj_dir."/.ckffunc"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckffunc"; ?>&value='+this.checked, function(text){ show_write(text)});"> Fully functional<br/>
+<input type="checkbox" name=".ckbuild" <?php echo @file_get_contents($proj_dir."/.public"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.public"; ?>&value='+this.checked, function(text){ show_write(text)});"> Public<br/>
+<input type="checkbox" name=".ckbuild" <?php echo @file_get_contents($proj_dir."/.core"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.core"; ?>&value='+this.checked, function(text){ show_write(text)});"> Core<br/>
+<input type="checkbox" name=".ckbuild" <?php echo @file_get_contents($proj_dir."/.lfiles"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.lfiles"; ?>&value='+this.checked, function(text){ show_write(text)});"> lfiles<br/>
+<input type="checkbox" name=".ckpfunc" <?php echo @file_get_contents($proj_dir."/.ckpfunc"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckpfunc"; ?>&value='+this.checked, function(text){ show_write(text)});"> Experimental<br/>
+<input type="checkbox" name=".ckffunc" <?php echo @file_get_contents($proj_dir."/.ckffunc"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckffunc"; ?>&value='+this.checked, function(text){ show_write(text)});"> Fully functional<br/>
 </fieldset>
 
 
 <fieldset style="float: left;">
-<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.related&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif"/></a>
+<legend>&nbsp;<a href="downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.related&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif"/></a>
     <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.related");  return false;'><img src="./images/text.png"/></a>
-              <a href="/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePage" target="pickf" onclick="javascript:void window.open('/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePage','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/add_file.png"/></a>
+              <a href="jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePage" target="pickf" onclick="javascript:void window.open('jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePage','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/add_file.png"/></a>
         &nbsp;<small>(.related)</small> Related: 
 </legend>
 <?php echo @file_get_contents($proj_dir."/.related"); ?>
@@ -1422,9 +1422,9 @@ if ($no_favicon)     echo "&nbsp;<a href=\"https://www.google.com/search?q=".$pr
 
 
 <fieldset>
-<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.head&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif"/></a> 
-        <a href="/doc/files/common/do.php?&targetdir=<?php echo realpath($dir); ?>&targetfile=.head" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.head");  return false;'><img src="./images/text.png"/></a>
-		&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.head&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>&before=addhr"><img src="./images/embedicon.png"/></a> 
+<legend>&nbsp;<a href="downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.head&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif"/></a> 
+        <a href="do.php?&targetdir=<?php echo realpath($dir); ?>&targetfile=.head" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.head");  return false;'><img src="./images/text.png"/></a>
+		&nbsp;<a href="downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.head&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>&before=addhr"><img src="./images/embedicon.png"/></a> 
               <small>(.head)</small> Notes: 
 </legend>
 <pre>
@@ -1449,7 +1449,7 @@ else
 <?php
 $escaped_link_cut.="favicon.ico";
 
-$file_data = '<a href="/doc/files/common/delete_line_in_recent.php?line='.uniqid().'" onclick="delEntry(this.href); return false;"><img src="./images/delete.png"/></a>&nbsp;<a href="'.$dir_loc.'/open-command-prompt-here.html" target="'.$prjname.'"><img src="'.$dir_loc.'/favicon.ico"  height="16" width="16"/>'.$display_link.'</a>'.$icon_run."<br/>\n";
+$file_data = '<a href="delete_line_in_recent.php?line='.uniqid().'" onclick="delEntry(this.href); return false;"><img src="./images/delete.png"/></a>&nbsp;<a href="'.$dir_loc.'/open-command-prompt-here.html" target="'.$prjname.'"><img src="'.$dir_loc.'/favicon.ico"  height="16" width="16"/>'.$display_link.'</a>'.$icon_run."<br/>\n";
 $ignorebefore=109;
 
 
@@ -1497,7 +1497,7 @@ if(substr($file_data,$ignorebefore)!=substr($firstline,$ignorebefore)) {		// onl
 </table>
 
 <img src="./images/command_promt-16.png" title="Run a command or input PARAM1" style="float: left;" /><span style="float: left;">&nbsp;</span>
-<form name="fform" id="f1" action="/doc/files/common/prompt-action.php" method="get" style="display: inline; float: left;" target="_raw_<?php echo $prjname; ?>">
+<form name="fform" id="f1" action="prompt-action.php" method="get" style="display: inline; float: left;" target="_raw_<?php echo $prjname; ?>">
 	<table align="left" valign="top" width="100%" border="0"><tbody>
 	<tr>
 		<td>
@@ -1530,7 +1530,7 @@ function OnButtonRun()
 {
 	window.open('', 'runThisOnServer', 'width=600,height=800,resizeable,scrollbars');
 	document.fform.target = 'runThisOnServer';
-    document.fform.action = "/doc/files/common/prompt-action.php"
+    document.fform.action = "prompt-action.php"
     document.fform.submit();             // Submit the page
     return true;
 }
@@ -1546,7 +1546,7 @@ function OnButtonRunSave()
 function AddFile(id)
 {
 var newfn=document.getElementById(id).value
-location.href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo str_replace('\\', '/', realpath($dir)); ?>&targetfile="+newfn+"&perma=<?php if($CurrOS!='Linux') echo str_replace('\\', '/', realpath('perma')); else echo str_replace('\\', '/', realpath('permalinux')); ?>";
+location.href="downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo str_replace('\\', '/', realpath($dir)); ?>&targetfile="+newfn+"&perma=<?php if($CurrOS!='Linux') echo str_replace('\\', '/', realpath('perma')); else echo str_replace('\\', '/', realpath('permalinux')); ?>";
 
 }
 </script>
@@ -1563,7 +1563,7 @@ function psexec(phpfile) {
 <table width="100%" style="clear: both;">
   <tr>
     <td><hr /></td>
-    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=specific-here.inc&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif"/></a>
+    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><a href="downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=specific-here.inc&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif"/></a>
     <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>specific-here.inc");  return false;'><img src="./images/text.png"/></a>
 	&nbsp;<strong>Saved commands specific to this &#34;<script>document.write("<?php echo $prjname; ?>");</script>&#34; project </strong><small>(stored in web page, see specific-here.inc, runs on Windows server)</small></td>
     <td><hr /></td>
@@ -1596,17 +1596,17 @@ if (file_exists($dir.'/'."specific-here.inc"))
 <table width="100%" style="clear: both;">
   <tr>
     <td><hr /></td>
-    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><a href="#view"><span><img src="./images/eye.gif"></span></a>&nbsp;<img src="./images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" /></span>&nbsp;<strong>Frequent Edit</strong>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.recentedit&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif" title="Edit this section"/></a>
+    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><a href="#view"><span><img src="./images/eye.gif"></span></a>&nbsp;<img src="./images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" /></span>&nbsp;<strong>Frequent Edit</strong>&nbsp;<a href="downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.recentedit&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif" title="Edit this section"/></a>
 	    <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.recentedit");  return false;'><img src="./images/text.png"/></a>
 <script>
 function recentedit_plus() {
 // rajouter le contenu de l'input field inpg
 var search_or_line_number = document.getElementById('inpg').value;
 //alert(search_or_line_number);
-window.open('/doc/files/common/jquery-fileTree/pickrecentedit.php?drive=c&param1='+search_or_line_number+'&parent=<?php echo $display_link;?>&headpath=:/UniServer/www/doc/files','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');
+window.open('jquery-fileTree/pickrecentedit.php?drive=c&param1='+search_or_line_number+'&parent=<?php echo $display_link;?>&headpath=:/UniServer/www/doc/files','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');
 }
 </script>
-		&nbsp;<a href="/doc/files/common/jquery-fileTree/pickrecentedit.php?drive=c&parent=<?php echo $display_link;?>&headpath=:/UniServer/www/doc/files" target="pickf" onclick="recentedit_plus(); return false;"><img src="./images/add_file.png" title="C:\"/></a>
+		&nbsp;<a href="jquery-fileTree/pickrecentedit.php?drive=c&parent=<?php echo $display_link;?>&headpath=:/UniServer/www/doc/files" target="pickf" onclick="recentedit_plus(); return false;"><img src="./images/add_file.png" title="C:\"/></a>
 	<!--
 	&nbsp;&nbsp;<a href="/doc/files/common/jquery-fileTree/pickrecentedit.php?drive=//&parent=<?php echo $display_link;?>&headpath=mlerman-vm-mint/lfiles" target="pickf"><img src="./images/add_file.png" title="M:\"/></a> 
 	-->
@@ -1616,7 +1616,7 @@ window.open('/doc/files/common/jquery-fileTree/pickrecentedit.php?drive=c&param1
   </tr>
 </table>
 <img src="./images/EditData16.png" title="Drag and drop full file path in this field" style="float: left;" /><span style="float: left;">&nbsp;</span>
-<form name="faddedit" method="get" action="/doc/files/common/addedit.php"  style="float: left;" >
+<form name="faddedit" method="get" action="addedit.php"  style="float: left;" >
 <input type="text" name="path" id="dropedit" onmouseout="onInputChgEdit(this.value)" onblur="onInputChgEdit(this.value)" size="200" />
 <input type="hidden" name="parent" value=<?php echo $display_link;?> />
 </form>
@@ -1721,63 +1721,63 @@ doc.close();
 		<small>(download and run local)</small>
 		&nbsp;<input size="6" id="addf" value="ui_test.run"/><a href="#" onclick="AddFile('addf');"><img src="./images/add_file.png"></a>  
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="cd_box" name=".ckcd" <?php echo @file_get_contents($proj_dir."/.ckcd"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckcd"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="cd_box" name=".ckcd" <?php echo @file_get_contents($proj_dir."/.ckcd"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckcd"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cd</label>
         </div>
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="run_box" name=".ckrun" <?php echo @file_get_contents($proj_dir."/.ckrun"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckrun"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="run_box" name=".ckrun" <?php echo @file_get_contents($proj_dir."/.ckrun"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckrun"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;run</label>
         </div>
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="hlp_box" name=".ckhlp" <?php echo @file_get_contents($proj_dir."/.ckhlp"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckhlp"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="hlp_box" name=".ckhlp" <?php echo @file_get_contents($proj_dir."/.ckhlp"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckhlp"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;help</label>
         </div>
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="pdf_box" name=".ckpdf" <?php echo @file_get_contents($proj_dir."/.ckpdf"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckpdf"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="pdf_box" name=".ckpdf" <?php echo @file_get_contents($proj_dir."/.ckpdf"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckpdf"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PDF</label>
         </div>
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="pty_box" name=".ckpty" <?php echo @file_get_contents($proj_dir."/.ckpty"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckpty"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="pty_box" name=".ckpty" <?php echo @file_get_contents($proj_dir."/.ckpty"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckpty"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;serial</label>
         </div>
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="ssh_box" name=".ckssh" <?php echo @file_get_contents($proj_dir."/.ckssh"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckssh"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="ssh_box" name=".ckssh" <?php echo @file_get_contents($proj_dir."/.ckssh"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckssh"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ssh</label>
         </div>
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="ver_box" name=".ckver" <?php echo @file_get_contents($proj_dir."/.ckver"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckver"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="ver_box" name=".ckver" <?php echo @file_get_contents($proj_dir."/.ckver"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckver"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ver</label>
         </div>
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="ftp_box" name=".ckftp" <?php echo @file_get_contents($proj_dir."/.ckftp"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckftp"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="ftp_box" name=".ckftp" <?php echo @file_get_contents($proj_dir."/.ckftp"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckftp"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ftp</label>
         </div>
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="reg_box" name=".ckreg" <?php echo @file_get_contents($proj_dir."/.ckreg"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckreg"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="reg_box" name=".ckreg" <?php echo @file_get_contents($proj_dir."/.ckreg"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckreg"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>regedit</small></label>
         </div>
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="bld_box" name=".ckbld" <?php echo @file_get_contents($proj_dir."/.ckbld"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckbld"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="bld_box" name=".ckbld" <?php echo @file_get_contents($proj_dir."/.ckbld"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckbld"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;build</label>
         </div>
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="bed_box" name=".ckbed" <?php echo @file_get_contents($proj_dir."/.ckbed"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckbed"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="bed_box" name=".ckbed" <?php echo @file_get_contents($proj_dir."/.ckbed"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckbed"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;embed</label>
         </div>
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="scp_box" name=".ckscp" <?php echo @file_get_contents($proj_dir."/.ckscp"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckscp"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="scp_box" name=".ckscp" <?php echo @file_get_contents($proj_dir."/.ckscp"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckscp"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;winscp</label>
         </div>
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="ie_box" name=".ckbie" <?php echo @file_get_contents($proj_dir."/.ckbie"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckbie"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="ie_box" name=".ckbie" <?php echo @file_get_contents($proj_dir."/.ckbie"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckbie"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IE</label>
         </div>
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="cod_box" name=".ckcod" <?php echo @file_get_contents($proj_dir."/.ckcod"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckcod"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="cod_box" name=".ckcod" <?php echo @file_get_contents($proj_dir."/.ckcod"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckcod"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;code</label>
         </div>
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="jir_box" name=".ckjir" <?php echo @file_get_contents($proj_dir."/.ckjir"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckjir"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="jir_box" name=".ckjir" <?php echo @file_get_contents($proj_dir."/.ckjir"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckjir"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jira</label>
         </div>
 	<!--
@@ -1817,29 +1817,29 @@ if ($handle = opendir($dir)) {
 							$str_bulle_icon_png="comment_exist.png";
 						}
 					}
-						echo '<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&admin='.$admin.'" onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'cmdinput\').value;"   >'.$file.'</a>'
+						echo '<a class="winlink" href="downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&admin='.$admin.'" onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'cmdinput\').value;"   >'.$file.'</a>'
 							// to be debuged execute d'un coup
-							.'&nbsp;<a id="view'.$i.'" class="inline" href="/doc/files/common/downloadfile.php?fname=ui_opencon.run&targetdir=C:/UniServer/www/doc/files/Engineering/ENVIRONMENT/PYTHON/interactive_web_shell_standalone&fnamecon='.$file.'&dircon='.realpath($dir).'&admin='.$admin.'" onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'cmdinput\').value;"><img src="./images/command_promt-16.png" '.$onmouseover_view.' /></a>'
+							.'&nbsp;<a id="view'.$i.'" class="inline" href="downloadfile.php?fname=ui_opencon.run&targetdir=C:/UniServer/www/doc/files/Engineering/ENVIRONMENT/PYTHON/interactive_web_shell_standalone&fnamecon='.$file.'&dircon='.realpath($dir).'&admin='.$admin.'" onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'cmdinput\').value;"><img src="./images/command_promt-16.png" '.$onmouseover_view.' /></a>'
                             // was:
 							//.'&nbsp;<a id="view'.$i.'" class="inline" href="/doc/files/common/prompt-action.php?cmd='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/doc/files/common/prompt-action.php?cmd='.$file.'&rawdisplay=1&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="./images/command_promt-16.png" '.$onmouseover_view.' /></a>'
 							// to be debuged execute pas a pas
 							.'&nbsp;<a id="view'.$i.'" class="inline" href="/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/shell/shell.php?fname='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/shell/shell.php?fname='.$file.'&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="./images/debug16.png" '.$onmouseover_view.' /></a>'
 						// edit icon:
-							.' <a class="winlink" href="/doc/files/common/downloadfile.php?fname=ui_edit_this.run&targetdir='.realpath($dir).'&targetfile='.$file.'&perma='.realpath($dirperma).'"><img src="./images/notepad-plus-plus.gif"/></a>'
+							.' <a class="winlink" href="downloadfile.php?fname=ui_edit_this.run&targetdir='.realpath($dir).'&targetfile='.$file.'&perma='.realpath($dirperma).'"><img src="./images/notepad-plus-plus.gif"/></a>'
 							.'<a href="#" onclick=\'openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "'.$urldir.$file.'");  return false;\'><img src="./images/text.png"/></a>'
 							
 						// view icon xxx                                                                                                                 // window.open replace with alert to test
 							.'<a id="view'.$i.'" class="inline" href="/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="./images/view.png" '.$onmouseover_view.' /></a>'
 						// windows psexec icon
-							.'<a href="/doc/files/common/psexec.php?targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'"  onclick=\'psexec(this.href); return false;\' ><img src="./images/Windows16.png" title="System" /></a>'
+							.'<a href="psexec.php?targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'"  onclick=\'psexec(this.href); return false;\' ><img src="./images/Windows16.png" title="System" /></a>'
 						// for debug showing the output, without return false
 						//	.'<a href="/doc/files/common/psexec.php?targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'"  onclick=\'psexec(this.href); \' ><img src="./images/Windows16.png"/></a>'
 						// wine icon
-							.'<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname=wine_this.rn&targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath("permalinux").'"  ><img src="./images/wine16.png"/></a>'
+							.'<a class="linuxlink" href="downloadfile.php?fname=wine_this.rn&targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath("permalinux").'"  ><img src="./images/wine16.png"/></a>'
 						// add comment bull icon
-							.'<a id="bulle'.$i.'" class="inline" href="/doc/files/common/downloadfile.php?fname='.($CurrOS!='Linux'?'ui_':'').'edit_this.'.($CurrOS!='Linux'?'run':'rn').'&targetdir='.realpath($dir).'&targetfile=.'.$file.'&perma='.realpath($dirperma).($CurrOS!='Linux'?'':'Linux').'"  ><img src="./images/'.$str_bulle_icon_png.'"   '.$onmouseover.'/></a>'
+							.'<a id="bulle'.$i.'" class="inline" href="downloadfile.php?fname='.($CurrOS!='Linux'?'ui_':'').'edit_this.'.($CurrOS!='Linux'?'run':'rn').'&targetdir='.realpath($dir).'&targetfile=.'.$file.'&perma='.realpath($dirperma).($CurrOS!='Linux'?'':'Linux').'"  ><img src="./images/'.$str_bulle_icon_png.'"   '.$onmouseover.'/></a>'
 						// add screenshot camera icon
-							.'&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname=ui_screenshot.run&targetdir='.realpath($dir).'&urldir='.$urldir.'&targetfile=.'.$file.'&perma='.realpath($dirperma).'"><img src="./images/screenshot.png"/></a>';
+							.'&nbsp;<a class="winlink" href="downloadfile.php?fname=ui_screenshot.run&targetdir='.realpath($dir).'&urldir='.$urldir.'&targetfile=.'.$file.'&perma='.realpath($dirperma).'"><img src="./images/screenshot.png"/></a>';
 						echo '<br/>';
 						$i++;
 					}
@@ -1857,15 +1857,15 @@ if ($handle = opendir($dir)) {
     <td style="width:1px; padding: 0 10px; white-space: nowrap;"><img src="./images/refresh.gif"onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<span class="linuxlink" ><strong>Linux shell files in this &#34;<script>document.write("<?php echo $prjname; ?>");</script>&#34; project </strong><small>(download and run local)</small>&nbsp;<input size="6" id="addfl" value="test.rn"/><a href="#" onclick="AddFile('addfl');"><img src="./images/add_file.png"></a>
 	
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="run_box" name=".cklrun" <?php echo @file_get_contents($proj_dir."/.cklrun"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.cklrun"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="run_box" name=".cklrun" <?php echo @file_get_contents($proj_dir."/.cklrun"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.cklrun"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;run</label>
         </div>
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="ver_box" name=".cklver" <?php echo @file_get_contents($proj_dir."/.cklver"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.cklver"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="ver_box" name=".cklver" <?php echo @file_get_contents($proj_dir."/.cklver"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.cklver"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ver</label>
         </div>
         <div class="checkbox_wrapper">
-            <input type="checkbox" class="cd_box" name=".cklcd" <?php echo @file_get_contents($proj_dir."/.cklcd"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.cklcd"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
+            <input type="checkbox" class="cd_box" name=".cklcd" <?php echo @file_get_contents($proj_dir."/.cklcd"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.cklcd"; ?>&value='+this.checked, function(text){ show_write(text)}); location.reload(true);"/>
             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cd</label>
         </div>
 	
@@ -1888,9 +1888,9 @@ if ($handle = opendir($dir)) {
 				if(($rest==".SH") || ($rest==".RN")) {							// display only .bat files
 						$str_edit="";
 						if($CurrOS=="Linux") {
-							$str_edit = ' <a class="linuxlink" href="/doc/files/common/downloadfile.php?fname=edit_this.rn&targetdir='.realpath($dir).'&targetfile='.$file.'&perma='.realpath("permalinux").'"><img src="./images/notepad-plus-plus.gif"/></a>';
+							$str_edit = ' <a class="linuxlink" href="downloadfile.php?fname=edit_this.rn&targetdir='.realpath($dir).'&targetfile='.$file.'&perma='.realpath("permalinux").'"><img src="./images/notepad-plus-plus.gif"/></a>';
 						} else {
-							$str_edit = ' <a class="winlink" href="/doc/files/common/downloadfile.php?fname=ui_edit_this.run&targetdir='.realpath($dir).'&targetfile='.$file.'&perma='.realpath("perma").'"><img src="./images/notepad-plus-plus.gif"/></a>';
+							$str_edit = ' <a class="winlink" href="downloadfile.php?fname=ui_edit_this.run&targetdir='.realpath($dir).'&targetfile='.$file.'&perma='.realpath("perma").'"><img src="./images/notepad-plus-plus.gif"/></a>';
 						}
 						$str_edit.='<a href="#" onclick=\'openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "'.$urldir.$file.'");  return false;\'><img src="./images/text.png"/></a>';
 					if (file_exists ( $dir.'/.'.$file )) {	// prevent error messages in console 404 not found
@@ -1908,7 +1908,7 @@ if ($handle = opendir($dir)) {
 							$str_bulle_icon_png="comment_exist.png";
 						}
 					}
-						echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&term=gnome-terminal"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});">'.$file.'</a>'
+						echo '<a class="linuxlink" href="downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&term=gnome-terminal"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});">'.$file.'</a>'
 							// to be debug execute
 							.'&nbsp;<a id="lview'.$i.'" class="inline" href="/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/shell/shell.php?fname='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/shell/shell.php?fname='.$file.'&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="./images/debug16.png" '.$onmouseover_view.' /></a>'
 							// edit
@@ -1916,14 +1916,14 @@ if ($handle = opendir($dir)) {
 							// view 
 							.'<a id="lview'.$i.'" class="inline" href="/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="./images/view.png" '.$onmouseover_view.' /></a>'
 							// run a linux gui with windows psexec
-							.'<a class="winlink" href="/doc/files/common/runinlinux.php?targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'"  onclick=\'psexec(this.href); return false;\' ><img src="./images/linux.png"/></a>'
+							.'<a class="winlink" href="runinlinux.php?targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'"  onclick=\'psexec(this.href); return false;\' ><img src="./images/linux.png"/></a>'
 							//.'<a class="winlink" href="/doc/files/common/runinlinux.php?targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'"  onclick=\'psexec(this.href); \' ><img src="./images/linux.png"/></a>'
 							// cygwin
-							.'<a class="winlink" href="/doc/files/common/downloadfile.php?fname=ui_run_with_cygwin.run&targetdir='.realpath($dir).'&targetfile='.$file.'&perma='.realpath("permalinux").'"><img src="./images/cygwin16.png"/></a>'
+							.'<a class="winlink" href="downloadfile.php?fname=ui_run_with_cygwin.run&targetdir='.realpath($dir).'&targetfile='.$file.'&perma='.realpath("permalinux").'"><img src="./images/cygwin16.png"/></a>'
 							// add to constructor
-							.'&nbsp;<a href="/doc/files/common/copy_to_constructor.php?fname='.$file.'&targetdir='.$dir.'&urldir='.$urldir.'&host='.$host.'." onclick="javascript:void window.open(\'/doc/files/common/copy_to_constructor.php?fname='.$file.'&targetdir='.$dir.'&urldir='.$urldir.'&host='.$host.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="./images/constructor.ico" title="Add this to _constructor" /></a>'
+							.'&nbsp;<a href="copy_to_constructor.php?fname='.$file.'&targetdir='.$dir.'&urldir='.$urldir.'&host='.$host.'." onclick="javascript:void window.open(\'copy_to_constructor.php?fname='.$file.'&targetdir='.$dir.'&urldir='.$urldir.'&host='.$host.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="./images/constructor.ico" title="Add this to _constructor" /></a>'
 							// add comment bull icon
-							.'&nbsp;<a id="lbulle'.$i.'" class="inline" href="/doc/files/common/downloadfile.php?fname='.($CurrOS!='Linux'?'ui_':'').'edit_this.'.($CurrOS!='Linux'?'run':'rn').'&targetdir='.realpath($dir).'&targetfile=.'.$file.'&perma='.realpath("perma").($CurrOS!='Linux'?'':'Linux').'"  ><img src="./images/'.$str_bulle_icon_png.'"   '.$onmouseover.'/></a>';
+							.'&nbsp;<a id="lbulle'.$i.'" class="inline" href="downloadfile.php?fname='.($CurrOS!='Linux'?'ui_':'').'edit_this.'.($CurrOS!='Linux'?'run':'rn').'&targetdir='.realpath($dir).'&targetfile=.'.$file.'&perma='.realpath("perma").($CurrOS!='Linux'?'':'Linux').'"  ><img src="./images/'.$str_bulle_icon_png.'"   '.$onmouseover.'/></a>';
 							
 						echo '<br/>';
 						$i++;
@@ -1969,7 +1969,7 @@ if ($handle = opendir($dir)) {
 
 <img src="./images/copyclip.png" title="Drag and drop clipboard text in this field" style="float: left;" /><span style="float: left;">&nbsp;</span>
 
-<form name="faddclip" method="get" action="/doc/files/common/addclip.php"  style="float: left;" >
+<form name="faddclip" method="get" action="addclip.php"  style="float: left;" >
 <input type="text" name="path" id="dropclip" data-clipboard-text="something" onmouseout="bindme(this.id, 1); onInputChgClip(this.value);" onblur="onInputChgClip(this.value);" size="104%" />
 <input type="hidden" name="parent" value=<?php echo $display_link;?> /> <!-- mettre ici le contenu du filed id inph -->
 <input type="hidden" name="label" id="cliplabel"/>
@@ -2009,7 +2009,7 @@ if($CurrOS!="Linux")
 						if(substr($file,0,3)=="ui_") {			// only interactive commands
 							$onmouseover ='onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"';
 							$onmouseover = '';  // no need here
-							echo '<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" >'.$file.'</a>';
+							echo '<a class="winlink" href="downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" >'.$file.'</a>';
 							echo "&nbsp";
 							$i++;
 						}
@@ -2042,8 +2042,8 @@ echo "<hr/>\n";
 					) continue; 	// skip this file
 					$rest = strtoupper(substr($file, -3));
 					if($rest==".RN") {							// display only .bat files
-							echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});">'.$file.'</a>';
-						/////      echo '<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'cmdinput\').value;" >'.$file.'</a>';
+							echo '<a class="linuxlink" href="downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});">'.$file.'</a>';
+						/////      echo '<a class="winlink" href="downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'cmdinput\').value;" >'.$file.'</a>';
 							//echo '<br/>';
 							echo "&nbsp";
 							$i++;
@@ -2060,7 +2060,7 @@ echo "<hr/>\n";
 <table width="100%">
   <tr>
     <td><hr /></td>
-    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><img src="./images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Drag and drop url links in the box below</strong>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.links&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif" title="Edit this section"/></a>
+    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><img src="./images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Drag and drop url links in the box below</strong>&nbsp;<a href="downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.links&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif" title="Edit this section"/></a>
     <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.links");  return false;'><img src="./images/text.png"/></a>
 	
 	</td>
@@ -2068,7 +2068,7 @@ echo "<hr/>\n";
   </tr>
 </table>
 <img src="./images/link.png" title="Drag and drop url links in this field" style="float: left;" /><span style="float: left;">&nbsp;</span>
-<form name="faddlink" method="get" action="/doc/files/common/addlink.php" style="float: left;" >
+<form name="faddlink" method="get" action="addlink.php" style="float: left;" >
 <input type="text" name="url" id="idfaddlink" onmouseout="onInputChg(this.value)" onblur="onInputChg(this.value)" size="200" />
 <input type="hidden" name="parent" value=<?php echo $display_link;?> />
 </form>
@@ -2079,7 +2079,7 @@ echo "<hr/>\n";
 <table width="100%">
   <tr>
     <td><hr /></td>
-    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><img src="./images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Make a sound alert when the following file changes</strong>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.sound&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif" title="Edit this section"/></a>
+    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><img src="./images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Make a sound alert when the following file changes</strong>&nbsp;<a href="downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.sound&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="./images/notepad-plus-plus.gif" title="Edit this section"/></a>
     <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.sound");  return false;'><img src="./images/text.png"/></a>
 	</td>
     <td><hr /></td>
@@ -2087,7 +2087,7 @@ echo "<hr/>\n";
 </table>
 
 <img src="./images/speaker.png" title="Drag and drop full file path in this field" style="float: left;" /><span style="float: left;">&nbsp;</span>
-<form name="faddsound" method="get" action="/doc/files/common/addsound.php" style="float: left;" >
+<form name="faddsound" method="get" action="addsound.php" style="float: left;" >
 <input type="text" name="path" id="dropsound" onmouseout="onInputChgSound(this.value)" onblur="onInputChgSound(this.value)" size="200" />
 <input type="hidden" name="parent" value=<?php echo $display_link;?> />
 </form>
@@ -2207,11 +2207,11 @@ document.write(result);
 
 <fieldset>
 <legend>Attributes: </legend>
-<input type="checkbox" name=".cknotrack" <?php echo @file_get_contents($proj_dir."/.cknotrack"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.cknotrack"; ?>&value='+this.checked, function(text){ show_write(text)});"> Don't track time<br/>
-<input type="checkbox" name=".ckreport" <?php echo @file_get_contents($proj_dir."/.ckreport"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckreport"; ?>&value='+this.checked, function(text){ show_write(text)});"> Include in Sharepoint<br/>
-<input type="checkbox" name=".ckgithub" <?php echo @file_get_contents($proj_dir."/.ckgithub"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckgithub"; ?>&value='+this.checked, function(text){ show_write(text)});"> Add github commands<br/>
-<input type="checkbox" name=".ckftpx" <?php echo @file_get_contents($proj_dir."/.ckftpx"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckftpx"; ?>&value='+this.checked, function(text){ show_write(text)});"> Add FTP commands<br/>
-<input type="checkbox" name=".ckpasswd" <?php echo @file_get_contents($proj_dir."/.ckpasswd"); ?> onclick="getFileFromServer('/doc/files/common/write_ckfile.php?target=<?php echo $proj_dir."/.ckpasswd"; ?>&value='+this.checked, function(text){ show_write(text)});"> Password Protect (cannot be un-checked)<br/>
+<input type="checkbox" name=".cknotrack" <?php echo @file_get_contents($proj_dir."/.cknotrack"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.cknotrack"; ?>&value='+this.checked, function(text){ show_write(text)});"> Don't track time<br/>
+<input type="checkbox" name=".ckreport" <?php echo @file_get_contents($proj_dir."/.ckreport"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckreport"; ?>&value='+this.checked, function(text){ show_write(text)});"> Include in Sharepoint<br/>
+<input type="checkbox" name=".ckgithub" <?php echo @file_get_contents($proj_dir."/.ckgithub"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckgithub"; ?>&value='+this.checked, function(text){ show_write(text)});"> Add github commands<br/>
+<input type="checkbox" name=".ckftpx" <?php echo @file_get_contents($proj_dir."/.ckftpx"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckftpx"; ?>&value='+this.checked, function(text){ show_write(text)});"> Add FTP commands<br/>
+<input type="checkbox" name=".ckpasswd" <?php echo @file_get_contents($proj_dir."/.ckpasswd"); ?> onclick="getFileFromServer('write_ckfile.php?target=<?php echo $proj_dir."/.ckpasswd"; ?>&value='+this.checked, function(text){ show_write(text)});"> Password Protect (cannot be un-checked)<br/>
 </fieldset>
 
 <hr/>
@@ -2220,7 +2220,7 @@ document.write(result);
 <img src="./images/up.png" onclick="window.scrollTo(0, 0);" style="cursor:pointer" title="Scroll all the way up" /><br/><br/>
 <a href="#view" ><span><img src="./images/eye.gif" title="Scroll to view programs"></a><br/><br/>
 
-<a href="/doc/files/common/env.php?targetdir=<?php echo $dir; ?>" target="env" onclick="javascript:void window.open('/doc/files/common/env.php?targetdir=<?php echo $dir; ?>','1481656702602','width=1500,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/Programming-Variable-icon16.png" title="Manage environment variables" /></a><br/><br/>
+<a href="env.php?targetdir=<?php echo $dir; ?>" target="env" onclick="javascript:void window.open('env.php?targetdir=<?php echo $dir; ?>','1481656702602','width=1500,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="./images/Programming-Variable-icon16.png" title="Manage environment variables" /></a><br/><br/>
 <script>
 var str10="";
 </script>
@@ -2235,12 +2235,12 @@ if($CurrOS!="Linux")
 {
 	$dirp="perma";
 	$file="ui_total_commander.run";
-	echo '&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="./images/totalcommander16.png" title="Total commander" /></a><br/><br/>';
+	echo '&nbsp;<a class="winlink" href="downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="./images/totalcommander16.png" title="Total commander" /></a><br/><br/>';
 } else
 {
 	$dirpm="permalinux";
 	$file="krusaderHere.rn";
-	echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="./images/krusader16.png" title="krusader" /></a><br/><br/>';
+	echo '<a class="linuxlink" href="downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="./images/krusader16.png" title="krusader" /></a><br/><br/>';
 }
 
 
@@ -2248,12 +2248,12 @@ if($CurrOS!="Linux")
 {
 	$dirp="perma";
 	$file="ui_copy_path_to_clipboard.run";
-	echo '&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="./images/clip16.png" title="Copy path to clipboard" /></a><br/><br/>';
+	echo '&nbsp;<a class="winlink" href="downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="./images/clip16.png" title="Copy path to clipboard" /></a><br/><br/>';
 } else
 {
 	$dirpm="permalinux";
 	$file="copy_path_to_clipboard.rn";
-	echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="./images/clip16.png" title="Copy path to clipboard" /></a><br/><br/>';
+	echo '<a class="linuxlink" href="downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="./images/clip16.png" title="Copy path to clipboard" /></a><br/><br/>';
 }
 
 
@@ -2261,12 +2261,12 @@ if($CurrOS!="Linux")
 {
 	$dirp="perma";
 	$file="ui_DOS_prompt.run";
-	echo '&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="./images/terminal16.png" title="DOS session" /></a><br/><br/>';
+	echo '&nbsp;<a class="winlink" href="downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="./images/terminal16.png" title="DOS session" /></a><br/><br/>';
 } else
 {
 	$dirpm="permalinux";
 	$file="openTerminal.rn";
-	echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="./images/terminal16.png" title="Terminal" /></a><br/><br/>';
+	echo '<a class="linuxlink" href="downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="./images/terminal16.png" title="Terminal" /></a><br/><br/>';
 }
 
 ?>
@@ -2958,7 +2958,7 @@ for (i = 0; i < listItemAnchors.length; i++) {
 jQuery(function($){
     $.ajax({
         type: 'GET',
-        url: 'http://localhost/doc/files/common/jsonp.php',
+        url: 'http://localhost/jsonp.php',
         data: {
             field: 'value'
         },
@@ -3137,7 +3137,7 @@ function openOnceTest(url, target, file){
 
 
 <!--
-<iframe id="other" src="/doc/files/common/othersites.php?urldir=<?php echo $urldir; ?>" />
+<iframe id="other" src="othersites.php?urldir=<?php echo $urldir; ?>" />
 -->
 </body>
 </html>
