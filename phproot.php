@@ -5,4 +5,4 @@ echo "<a href='downloadfile.php?fname=ui_test_associate_extension.run&targetdir=
 ?>
 
 <hr/>
-<a href="index.php">index.php</a><br/>
+<a href="prj.php">prj.php</a><br/>
