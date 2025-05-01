@@ -1,6 +1,5 @@
 <?php
 $files_path = file_get_contents(getcwd().'\core_settings\FILES_PATH.sh.bat');
-// echo $files_path;
 echo '<br/>';
 echo 'on est dans ' . getcwd() . "\n";
 echo '<br/>';
@@ -27,7 +26,6 @@ echo 'slash_doc est ' . $slash_doc;  // example /doc/files
 echo '<br/>';
 
 
-
 // detect OS on client
 $onmouseover='';    // TODO previent erreur avec wampserver, a revoir
 $param1='';
@@ -47,16 +45,17 @@ echo 'escaped_link '.$escaped_link.'<br/>';		//ml  escaped_link //siliconkit.com
 
 
 $pos=strpos($escaped_link,"/doc/files");
-//   //mlerman-lap/doc/files/Engineering/ENVIRONMENT/NODE/fill_sd_ajax/open-command-prompt-here.html
-//                ^ = 13                                              ^ = -30
-$dir_loc=substr($escaped_link, $pos, -30);
-echo 'dir_loc '.$dir_loc.'<br/>';		//ml  dir_loc /doc/files/common
 
-$id_link=substr($escaped_link, 23);
-echo 'id_link '.$id_link.'<br/>';		//ml  id_link les/common/open-command-prompt-here.html
 
-$escaped_link_cut=substr($escaped_link,0,-29);
+// $escaped_link_cut=substr($escaped_link,0,-29);
+$escaped_link_cut='/doc' . $slash_doc;
 echo 'escaped_link_cut '.$escaped_link_cut.'<br/>';  //ml  escaped_link_cut //siliconkit.com/doc/files/common/
+
+$id_link=$escaped_link_cut;
+echo 'id_link '.$id_link.'<br/>';
+
+$dir_loc=$id_link; 
+echo 'dir_loc '.$dir_loc.'<br/>';		//ml  dir_loc /doc/files/common
 
 
 $display_link=$escaped_link_cut;
@@ -1829,7 +1828,7 @@ if ($handle = opendir($dir)) {
 							.'<a href="#" onclick=\'openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "'.$urldir.$file.'");  return false;\'><img src="./images/text.png"/></a>'
 							
 						// view icon xxx                                                                                                                 // window.open replace with alert to test
-							.'<a id="view'.$i.'" class="inline" href="/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="./images/view.png" '.$onmouseover_view.' /></a>'
+							.'<a id="view'.$i.'" class="inline" href="viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="./images/view.png" '.$onmouseover_view.' /></a>'
 						// windows psexec icon
 							.'<a href="psexec.php?targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'"  onclick=\'psexec(this.href); return false;\' ><img src="./images/Windows16.png" title="System" /></a>'
 						// for debug showing the output, without return false
@@ -1914,7 +1913,7 @@ if ($handle = opendir($dir)) {
 							// edit
 							.$str_edit
 							// view 
-							.'<a id="lview'.$i.'" class="inline" href="/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="./images/view.png" '.$onmouseover_view.' /></a>'
+							.'<a id="lview'.$i.'" class="inline" href="viewlfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'" onclick="javascript:void window.open(\'/viewfile/viewdos.php?fname='.$file.'&targetdir='.$dir.'\',\'1481602525735\',\'width=980,height=550,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=150,top=50\'); return false;"><img src="./images/view.png" '.$onmouseover_view.' /></a>'
 							// run a linux gui with windows psexec
 							.'<a class="winlink" href="runinlinux.php?targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'"  onclick=\'psexec(this.href); return false;\' ><img src="./images/linux.png"/></a>'
 							//.'<a class="winlink" href="/doc/files/common/runinlinux.php?targetdir='.realpath($dir).'&targetfile='.$file.'&urldir='.$urldir.'&host='.$host.'"  onclick=\'psexec(this.href); \' ><img src="./images/linux.png"/></a>'
@@ -3130,7 +3129,7 @@ function openOnceTest(url, target, file){
 <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/downloadfile.php");  return false;'><img src="./images/text.png" title="downloadfile.php"/></a>&nbsp; 
 <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/instantedithead.js");  return false;'><img src="./images/text.png" title="instantedithead.js"/></a>&nbsp; 
 <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/updatehead.php");  return false;'><img src="./images/text.png" title="updatehead.php"/></a>&nbsp; 
-<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/viewfile/viewdos.php");  return false;'><img src="./images/text.png" title="viewdos.php"/></a>&nbsp; 
+<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "viewlfile/viewdos.php");  return false;'><img src="./images/text.png" title="viewdos.php"/></a>&nbsp; 
 <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/write_ckfile.php");  return false;'><img src="./images/text.png" title="write_ckfile.php"/></a>&nbsp; 
 <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/psexec.php");  return false;'><img src="./images/text.png" title="psexec.php"/></a>&nbsp; 
 -->
