@@ -28,7 +28,6 @@ if (isset($_GET["term"])) {
   $term=$_GET["term"];				// term is the name of the terminal typically gnome-terminal or not set
 }
 
-
 $before="";
 if (isset($_GET["before"])) {
   $before=$_GET["before"];				// before is addhr or not set
@@ -121,7 +120,6 @@ $current .= file_get_contents($filehead);
 file_put_contents($filehead, $current);
 }
 
-
 // detect OS on client
 include 'oslist.php';
 // Loop through the array of user agents and matching operating systems
@@ -147,7 +145,6 @@ $mac="mac";
 $CurrOS="Linux";
 }
 
- 
 $targetdirxp=$targetdir;
 //$drive="C:";
 if($CurrOS=='Windows XP') {
@@ -163,7 +160,6 @@ if ($_SERVER["HTTP_HOST"]=="win7-pc") {
 if ($_SERVER["HTTP_HOST"]=="xsjmikhaell30") {
   $prefix_string="";
 }
-
 
 // HTTP_USER_AGENT
 //file_put_contents("debug.txt", "HTTP_USER_AGENT : ".$_SERVER["HTTP_USER_AGENT"]."\n" , FILE_APPEND);
@@ -182,8 +178,6 @@ $str_path="";
 if (isset($_SERVER['HTTP_REFERER'])) {
   $str_ref=$_SERVER['HTTP_REFERER'];
 } 
-
-// was $str_ref=$_SERVER['HTTP_REFERER'];
 
 $pos=strrpos($str_ref,"/");
 if (strpos($str_ref, 'open-command-prompt-here.html') !== false) {
@@ -231,13 +225,11 @@ if(($CurrOS=='Linux')||($CurrOS=='Android')) {
 	$perma=$perma."Linux";
   }
 
-
     // replace    "/doc/files/ThisPCLinux/apt-get_update"
     // with "/home/user/files/ThisPCLinux/apt-get_update"
     $url=$urldir;
     $urldir=str_replace("/doc/","/home/user/",$urldir);  // adjust for linux
   
-
   // copy source destination
   if($CurrOS=='Linux') {
     $text="#!/bin/bash "."\n";
@@ -305,8 +297,7 @@ if(($CurrOS=='Linux')||($CurrOS=='Android')) {
 	// pause for debug
     $text.="  echo http_proxy is \$http_proxy \n"; 
 	//$text.="  read -p \"Press any key to continue . . .\" \n"; 
-	  
-	  
+	
     //$text.="if [ ! -d \"\$LINDIRECTORY\" ]; then"."\n"; 
     $text.="if [ ! -d \"/home/user/".$_SERVER["HTTP_HOST"]."/files/common/\" ]; then"."\n"; 
     $text.="  echo \"dir=\$LINDIRECTORY\""."\n";
@@ -394,7 +385,6 @@ if(($CurrOS=='Linux')||($CurrOS=='Android')) {
     //$text.="read -p \"Press [Enter] key to continue... \" "."\n";
   }
 
-
   $text.="# ======= original file below this line ======= "."\n";
 
   if(isset($_GET["perma"])) {
@@ -404,7 +394,6 @@ if(($CurrOS=='Linux')||($CurrOS=='Android')) {
 
     $textbat=file_get_contents($targetdir."\\".$fname);
   }
-
 
   //ici gnome-termilaler le fichier
   //s'il ne contient pas deja le string "gnome-terminal"
@@ -435,7 +424,6 @@ if(($CurrOS=='Linux')||($CurrOS=='Android')) {
 											// la suite de ce string est quote et double-quote
         //$tempstr=$term." -e 'csh -c \"";	// pas de pause
         
-        
 		// remove all comment lines starting with #
 		$array = explode("\n",$textbat);
 		foreach($array as $arr) {
@@ -449,16 +437,13 @@ if(($CurrOS=='Linux')||($CurrOS=='Android')) {
 			}
 		}
 		$textbat_no_comments = implode("\n",$output);
-        
-        
+
         $tempstr.= str_replace("\n", ';', addcslashes($textbat_no_comments,'"\''));	// TODO
         $tempstr.="\"'"."\n";					// ferme 
-//file_put_contents("debug.txt", $tempstr);
         $text.=$tempstr;
 	  }
     }
  
-
   $text.="\n"."# ======= add auto delete ======="."\n";
   $text.='#rm -- "$0"'."\n";
 
@@ -484,8 +469,6 @@ if(($CurrOS=='Linux')||($CurrOS=='Android')) {
 
     $prjpath=$winpath;
 
-
-
   // OK the client is windows but how if the link was for linux
   // let's try fix this
   // if fname==krusaderHere.rn then ui_total_commander.run
@@ -493,7 +476,6 @@ if(($CurrOS=='Linux')||($CurrOS=='Android')) {
     $fname='ui_total_commander.run';
     $perma=substr($perma,0,-5);					// remove "Linux" from the suffix;
 	}
-
 
   //$admin=false;
   $rest= strtoupper(substr($fname, -4));
@@ -525,7 +507,6 @@ if(($CurrOS=='Linux')||($CurrOS=='Android')) {
   $text.="rem from REFERER :\r\n";
   $text.="set PRJNAME=".$prjname."\r\n";
   $text.="set LINPATH=".$linpath."\r\n";
-//$winpathforwardslash  
   $text.="set WINPATHFORWARDSLASH=".$winpathforwardslash."\r\n";
   $text.="set WINPATH=".$winpath."\r\n";
   $text.="set PRJPATH=".$prjpath."\r\n";
@@ -547,7 +528,6 @@ if(($CurrOS=='Linux')||($CurrOS=='Android')) {
   } else {
     $textbat=file_get_contents($targetdir."\\".$fname);
   }
-
 
   // create a file in the download directory
   if($admin) {
@@ -589,7 +569,6 @@ if(($CurrOS=='Linux')||($CurrOS=='Android')) {
   $text.="rem ======= original file below this line ======= & @echo on\r\n";
   $text.="cls\r\n";
 
-  
 $array = explode("\n",$textbat);
 foreach($array as $arr) {
 	if (
@@ -601,35 +580,23 @@ foreach($array as $arr) {
 	$output[] = $arr;
 }
 $textbat = implode("\n",$output);
-
-  
-  
-  
-  
   
   if (!$admin) {
     $text.=$textbat;
     $text.="\r\n"."rem ======= add auto delete =======\r\n";
-    //$text.="echo 1 %0 %USERPROFILE%\Downloads\r\n";
-	
+
 	//$text.="goto EOF\r\n";		// this to disable auto deletion
 	$text.="set curfile=%0\r\n";
     $text.='set curfile2=%curfile:"=%'."\r\n";
     $text.='if "%curfile:~-4%" == ".bat" ( echo auto delete .bat '."\r\n";
     $text.="set curfile3=%curfile:~0,-4%\r\n";
-    $text.="echo if exist !curfile3! del !curfile3! /Q\r\n";
+    $text.="if exist !curfile3! del !curfile3! /Q\r\n";
+    //$text.="pause \r\n";
     $text.=") \r\n";
-
-	
-	
-    //$text.="if exist %0 del %0 /Q\r\n";
-    //$text.="pause\r\n";
 
     $text.="set curdir=%cd%\r\n";
     $text.='if "%curdir:~-10%" == "\Downloads" ( echo deleting "%~f0"'."\r\n";
     $text.= "\r\n".'echo start /b "" cmd /c del "%~f0"&exit /b'."\r\n";
-    //$text.="echo 4\r\n";
-    //$text.="pause\r\n";
     $text.="  )";
   }
   if (!$isexclam) $text.="\r\nendlocal\r\n";
@@ -645,7 +612,6 @@ $textbat = implode("\n",$output);
   if ($admin) {
     print('c:\UniServer\www\doc\files\ThisPC\nircmd\nircmdc.exe elevate cmd /K " call %cd%\.admin.bat & exit"');
   }
-  
 }
 
 ?>
