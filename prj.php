@@ -120,7 +120,7 @@ include $_SERVER['DOCUMENT_ROOT'].'\local\oslist.php';
 foreach($OSList as $CurrOS=>$Match)
 	{
 		// Find a match
-		if (preg_match('/'.$Match.'/', $_SERVER['HTTP_USER_AGENT']))
+		if (preg_match('~'.$Match.'~', $_SERVER['HTTP_USER_AGENT']))
 			{
 			// We found the correct match
 			break;
@@ -1268,12 +1268,13 @@ if ($icon_run!="") {
 if($CurrOS!="Linux")
 {
   $dirp=$files_path_common_absolute."\perma";
-  echo 'dirp est '.$dirp.'<br/>';
+  //echo 'dirp est '.$dirp.'<br/>';
   $file="ui_total_commander.run";
   echo '&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="/doc/files/common/images/totalcommander16.png" title="Total commander" /></a>';  
 } else
 {
-	$dirpm="permalinux";
+    $dirpm=$files_path_common_absolute."\permalinux";
+    //echo 'dirpm est '.$dirpm.'<br/>';
 	$file="krusaderHere.rn";
 	echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="/doc/files/common/images/krusader16.png" title="krusader" /></a>';
 }
@@ -2036,7 +2037,7 @@ if($CurrOS!="Linux")
 if($CurrOS=="Linux")
 {
 echo "<hr/>\n";
-	$dirpm="permalinux";
+    $dirpm=$files_path_common_absolute."\permalinux";
 
 	if ($handle = opendir($dirpm)) {
 		$i=0;
@@ -2240,12 +2241,12 @@ var str10="";
 
 if($CurrOS!="Linux")
 {
-	$dirp="perma";
+    $dirp=$files_path_common_absolute."\perma";
 	$file="ui_total_commander.run";
 	echo '&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="/doc/files/common/images/totalcommander16.png" title="Total commander" /></a><br/><br/>';
 } else
 {
-	$dirpm="permalinux";
+    $dirpm=$files_path_common_absolute."\permalinux";
 	$file="krusaderHere.rn";
 	echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="/doc/files/common/images/krusader16.png" title="krusader" /></a><br/><br/>';
 }
@@ -2253,12 +2254,12 @@ if($CurrOS!="Linux")
 
 if($CurrOS!="Linux")
 {
-	$dirp="perma";
+    $dirp=$files_path_common_absolute."\perma";
 	$file="ui_copy_path_to_clipboard.run";
 	echo '&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="/doc/files/common/images/clip16.png" title="Copy path to clipboard" /></a><br/><br/>';
 } else
 {
-	$dirpm="permalinux";
+    $dirpm=$files_path_common_absolute."\permalinux";
 	$file="copy_path_to_clipboard.rn";
 	echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="/doc/files/common/images/clip16.png" title="Copy path to clipboard" /></a><br/><br/>';
 }
@@ -2266,12 +2267,12 @@ if($CurrOS!="Linux")
 
 if($CurrOS!="Linux")
 {
-	$dirp="perma";
+    $dirp=$files_path_common_absolute."\perma";
 	$file="ui_DOS_prompt.run";
 	echo '&nbsp;<a class="winlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dir).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirp).'" '.$onmouseover.'  onclick="this.href=this.href+\'&param1=\'+document.getElementById(\'inpf\').value.replaceAll(\'\\\\\',\'`\');" ><img src="/doc/files/common/images/terminal16.png" title="DOS session" /></a><br/><br/>';
 } else
 {
-	$dirpm="permalinux";
+    $dirpm=$files_path_common_absolute."\permalinux";
 	$file="openTerminal.rn";
 	echo '<a class="linuxlink" href="/doc/files/common/downloadfile.php?fname='.$file.'&targetdir='.realpath($dirlocal).'&targetfile='.$prjname.'&urldir='.$urldir.'&host='.$host.'&perma='.realpath($dirpm).'"  onmouseover="getFileFromServer('.'\'.'.$file.'\''.', function(text){ show(text, this, -1)});"><img src="/doc/files/common/images/terminal16.png" title="Terminal" /></a><br/><br/>';
 }
