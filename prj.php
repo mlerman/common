@@ -1506,7 +1506,7 @@ if(substr($file_data,$ignorebefore)!=substr($firstline,$ignorebefore)) {		// onl
 </table>
 
 <img src="/doc/files/common/images/command_promt-16.png" title="Run a command or input PARAM1" style="float: left;" /><span style="float: left;">&nbsp;</span>
-<form name="fform" id="f1" action="prompt-action.php" method="get" style="display: inline; float: left;" target="_raw_<?php echo $prjname; ?>">
+<form name="fform" id="f1" action="/doc/files/common/prompt-action.php" method="get" style="display: inline; float: left;" target="_raw_<?php echo $prjname; ?>">
 	<table align="left" valign="top" width="100%" border="0"><tbody>
 	<tr>
 		<td>
@@ -1539,7 +1539,7 @@ function OnButtonRun()
 {
 	window.open('', 'runThisOnServer', 'width=600,height=800,resizeable,scrollbars');
 	document.fform.target = 'runThisOnServer';
-    document.fform.action = "prompt-action.php"
+    document.fform.action = "/doc/files/common/prompt-action.php"
     document.fform.submit();             // Submit the page
     return true;
 }
