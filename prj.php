@@ -1,8 +1,8 @@
 <?php
 $files_path = file_get_contents($_SERVER['DOCUMENT_ROOT'].'\local\FILES_PATH.sh.bat');
-echo '<br/>';
-echo 'on est dans ' . getcwd() . "\n";
-echo '<br/>';
+//echo '<br/>';
+//echo 'on est dans ' . getcwd() . "\n";
+//echo '<br/>';
 $files_path = str_replace("set FILES_PATH=", "", $files_path);
 $files_path_common_absolute = $files_path;
 
@@ -15,10 +15,10 @@ $files_path_common_absolute = $files_path_common_absolute . 'common';
 $dir = $files_path;
 // remove trailing slash
 $files_path = rtrim($files_path, '/');
-echo 'files_path est ' . $files_path;  // example C:/UniServer/www/doc/files
-echo '<br/>';
-echo 'files_path_common_absolute est ' . $files_path_common_absolute;  // example C:/UniServer/www/doc/files/common
-echo '<br/>';
+//echo 'files_path est ' . $files_path;  // example C:/UniServer/www/doc/files
+//echo '<br/>';
+//echo 'files_path_common_absolute est ' . $files_path_common_absolute;  // example C:/UniServer/www/doc/files/common
+//echo '<br/>';
 
 
 // Find the last slash
@@ -29,26 +29,25 @@ $secondLastSlash = strrpos(substr($files_path, 0, $lastSlash), "/");
 
 // Extract the substring from the second to last slash onwards
 $slash_files = substr($files_path, $secondLastSlash);
-echo 'slash_files est ' . $slash_files;  // example /doc/files
-echo '<br/>';
+//echo 'slash_files est ' . $slash_files;  // example /doc/files
+//echo '<br/>';
 
 
 // detect OS on client
 $onmouseover='';    // TODO previent erreur avec wampserver, a revoir
 $param1='';
 $link =  "//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-echo 'link est '.$link.'<br/>';		//ml //siliconkit.com/doc/files/common/open-command-prompt-here.html
-//$linkip =  "//$_SERVER[SERVER_ADDR]$_SERVER[REQUEST_URI]";
+//echo 'link est '.$link.'<br/>';		//ml //siliconkit.com/doc/files/common/open-command-prompt-here.html
 $linkip =  "//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-echo 'linkip est '.$linkip.'<br/>';	//ml  linkip est //192.168.1.72/doc/files/common/open-command-prompt-here.html
+//echo 'linkip est '.$linkip.'<br/>';	//ml  linkip est //192.168.1.72/doc/files/common/open-command-prompt-here.html
 
 $hostname=gethostname();
 $linkname =  "//$hostname$_SERVER[REQUEST_URI]";
-echo 'linkname '.$linkname.'<br/>';		//ml  linkname //DESKTOP-MCQS4FT/doc/files/common/open-command-prompt-here.html
+//echo 'linkname '.$linkname.'<br/>';		//ml  linkname //DESKTOP-MCQS4FT/doc/files/common/open-command-prompt-here.html
 
 //   //mlerman-lap/doc/files/Engineering/ENVIRONMENT/NODE/fill_sd_ajax/open-command-prompt-here.html
 $escaped_link = htmlspecialchars($link, ENT_QUOTES, 'UTF-8');
-echo 'escaped_link '.$escaped_link.'<br/>';		//ml  escaped_link //siliconkit.com/doc/files/common/open-command-prompt-here.html
+//echo 'escaped_link '.$escaped_link.'<br/>';		//ml  escaped_link //siliconkit.com/doc/files/common/open-command-prompt-here.html
 
 
 $pos=strpos($escaped_link,"/doc/files");
@@ -56,47 +55,42 @@ $pos=strpos($escaped_link,"/doc/files");
 
 // $escaped_link_cut=substr($escaped_link,0,-29);
 $escaped_link_cut='/doc' . $slash_files;
-echo 'escaped_link_cut '.$escaped_link_cut.'<br/>';  //ml  escaped_link_cut //siliconkit.com/doc/files/common/
+//echo 'escaped_link_cut '.$escaped_link_cut.'<br/>';  //ml  escaped_link_cut //siliconkit.com/doc/files/common/
 
 $id_link=$escaped_link_cut;
-echo 'id_link '.$id_link.'<br/>';
+//echo 'id_link '.$id_link.'<br/>';
 
 $dir_loc=$id_link; 
-echo 'dir_loc '.$dir_loc.'<br/>';		//ml  dir_loc /doc/files/common
+//echo 'dir_loc '.$dir_loc.'<br/>';		//ml  dir_loc /doc/files/common
 
 
 $display_link=$escaped_link_cut;
 $pos=strpos($escaped_link_cut,"/doc/files");
 $host=$_SERVER['HTTP_HOST'];
-echo 'host '.$host.'<br/>';
-$urldir=substr($display_link, $pos);
-echo 'urldir '.$urldir.'<br/>';
+//echo 'host '.$host.'<br/>';
+$urldir=substr($display_link, $pos).'/';
+//echo 'urldir '.$urldir.'<br/>';
 $display_link=substr($display_link, $pos+10);
-echo 'display_link '.$display_link.'<br/>';		//ml  display_link /common/
+//echo 'display_link '.$display_link.'<br/>';		//ml  display_link /common/
+//echo "dir is ".$dir.'<br/>';   //ml  dir is C:/UniServer/www/doc/files/common
 
-
-echo "dir is ".$dir.'<br/>';   //ml  dir is C:/UniServer/www/doc/files/common
-
-
-//$proj_dir=substr($_GET["reqfname"], 0, strrpos($_GET["reqfname"], "/"));
 $proj_dir=$dir;
 $proj_dir_lin=str_replace("C:/UniServer/www/doc/","/home/user/",$proj_dir);
-echo "proj_dir_lin is ".$proj_dir_lin.'<br/>';		//ml   proj_dir_lin is /home/user/files/common
+//echo "proj_dir_lin is ".$proj_dir_lin.'<br/>';		//ml   proj_dir_lin is /home/user/files/common
 
 
 
 $urldirpapa=substr($urldir,0, strrpos(substr($urldir,0,-1),"/"));
-echo "urldirpapa is ".$urldirpapa.'<br/>';		//ml   urldirpapa is /doc/files
+//echo "urldirpapa is ".$urldirpapa.'<br/>';		//ml   urldirpapa is /doc/files
 
 
 $clienthost = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-//$clienthost = "mlerman-lap";		// hack temporaire
 $clienthost = str_replace(".micron.com", "", $clienthost);
 $clienthost = strtolower($clienthost);
 
 $pos=strrpos($dir, "/");
 $prjname=substr($dir, $pos+1);
-echo "prjname is ".$prjname.'<br/>';		//ml   prjname is common
+//echo "prjname is ".$prjname.'<br/>';		//ml   prjname is common
 
 
 
@@ -147,7 +141,7 @@ if (($CurrOS=="Windows 7")||($CurrOS=="Windows 10")) echo "<img src='/doc/files/
 
 
 $no_favicon=false;
-echo '<br/>'.$dir.'/favicon.ico'.'<br/>';
+//echo '<br/>'.$dir.'/favicon.ico'.'<br/>';
 
 
 if (file_exists ( $dir.'/get_param1.bat' ))
@@ -1430,7 +1424,6 @@ if ($no_favicon)     echo "&nbsp;<a href=\"https://www.google.com/search?q=".$pr
 
 
 <fieldset>
-<?php echo 'dirp est ' . $dirp . '<br/>'; ?>
 <legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.head&perma=<?php if($CurrOS!='Linux') echo $dirp; else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a> 
         <a href="do.php?&targetdir=<?php echo realpath($dir); ?>&targetfile=.head" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.head");  return false;'><img src="/doc/files/common/images/text.png"/></a>
 		&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.head&perma=<?php if($CurrOS!='Linux') echo $dirp; else echo realpath('permalinux'); ?>&before=addhr"><img src="/doc/files/common/images/embedicon.png"/></a> 
@@ -3036,19 +3029,16 @@ if (window.name!="<?php echo $prjname; ?>")
 
 PARAM1=<?php echo $param1; ?>
 
-    <div id='examples'>
-
+<!--
+<div id='examples'>
 <span class='inline' data-tipped-options="inline: 'inline-tooltip-1'">Inline 1</span>
 <div id='inline-tooltip-1' style='display:none'>Moved into the tooltip</div>
-
 <span class='inline' data-tipped-options="inline: 'inline-tooltip-2'">Inline 2</span>
 <div id='inline-tooltip-2' style='display:none'>Another one</div>
-
-      <div class='boxes positions'>
-
-      </div> <!-- /#examples -->
-
-    </div>
+<div class='boxes positions'></div> 
+</div>
+-->
+  
 <br/>
 <br/>
 <br/>
@@ -3139,13 +3129,14 @@ function openOnceTest(url, target, file){
 <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/eXtplorer2-1-15/config/.htusers.php");  return false;'><img src="/doc/files/common/images/text.png" title="mntFiles.rn"/></a>&nbsp; 
 <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/permalinux/mntFiles.rn");  return false;'><img src="/doc/files/common/images/text.png" title="mntFiles.rn"/></a>&nbsp; 
 <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/open-command-prompt-here.html");  return false;'><img src="/doc/files/common/images/text.png" title="open-command-prompt-here.html"/></a>&nbsp; 
-<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common//doc/files/common/downloadfile.php");  return false;'><img src="/doc/files/common/images/text.png" title="/doc/files/common/downloadfile.php"/></a>&nbsp; 
 <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/instantedithead.js");  return false;'><img src="/doc/files/common/images/text.png" title="instantedithead.js"/></a>&nbsp; 
 <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/updatehead.php");  return false;'><img src="/doc/files/common/images/text.png" title="updatehead.php"/></a>&nbsp; 
 <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "viewlfile/viewdos.php");  return false;'><img src="/doc/files/common/images/text.png" title="viewdos.php"/></a>&nbsp; 
 <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/write_ckfile.php");  return false;'><img src="/doc/files/common/images/text.png" title="write_ckfile.php"/></a>&nbsp; 
 <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/psexec.php");  return false;'><img src="/doc/files/common/images/text.png" title="psexec.php"/></a>&nbsp; 
 -->
+
+<a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "/doc/files/common/downloadfile.php");  return false;'><img src="/doc/files/common/images/text.png" title="/doc/files/common/downloadfile.php"/></a>&nbsp; 
 
 
 <!--
