@@ -1313,7 +1313,7 @@ if (file_exists($dir."/.code")) {
 <fieldset style="float: left;">
 
 <fieldset style="float: left;">
-<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.previous&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>" ><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>
+<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.previous&perma=<?php if($CurrOS!='Linux') echo $dirp; else echo realpath('permalinux'); ?>" ><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>
         <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.previous");  return false;'><img src="/doc/files/common/images/text.png"/></a>
               <a href="jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePagePrevious" target="pickf" onclick="javascript:void window.open('jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePagePrevious','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/add_file.png"/></a>
         &nbsp;<img src="/doc/files/common/images/Arrowprevious48.png"/> 
@@ -1321,7 +1321,7 @@ if (file_exists($dir."/.code")) {
 <?php echo @file_get_contents($proj_dir."/.previous"); ?>
 </fieldset>
 <fieldset>
-<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.next&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>
+<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.next&perma=<?php if($CurrOS!='Linux') echo $dirp; else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>
         <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.next");  return false;'><img src="/doc/files/common/images/text.png"/></a>
               <a href="jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePageNext" target="pickf" onclick="javascript:void window.open('jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePageNext','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/add_file.png"/></a>
         &nbsp;<img src="/doc/files/common/images/Arrownext48.png"/> 
@@ -1411,7 +1411,7 @@ if($param1!="") echo "\";";
 
 
 <fieldset style="float: left;">
-<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.related&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>
+<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.related&perma=<?php if($CurrOS!='Linux') echo $dirp; else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>
     <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.related");  return false;'><img src="/doc/files/common/images/text.png"/></a>
               <a href="jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePage" target="pickf" onclick="javascript:void window.open('jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePage','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/add_file.png"/></a>
         &nbsp;<small>(.related)</small> Related: 
@@ -1430,9 +1430,10 @@ if ($no_favicon)     echo "&nbsp;<a href=\"https://www.google.com/search?q=".$pr
 
 
 <fieldset>
-<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.head&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a> 
+<?php echo 'dirp est ' . $dirp . '<br/>'; ?>
+<legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.head&perma=<?php if($CurrOS!='Linux') echo $dirp; else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a> 
         <a href="do.php?&targetdir=<?php echo realpath($dir); ?>&targetfile=.head" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.head");  return false;'><img src="/doc/files/common/images/text.png"/></a>
-		&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.head&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>&before=addhr"><img src="/doc/files/common/images/embedicon.png"/></a> 
+		&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.head&perma=<?php if($CurrOS!='Linux') echo $dirp; else echo realpath('permalinux'); ?>&before=addhr"><img src="/doc/files/common/images/embedicon.png"/></a> 
               <small>(.head)</small> Notes: 
 </legend>
 <pre>
@@ -1554,7 +1555,7 @@ function OnButtonRunSave()
 function AddFile(id)
 {
 var newfn=document.getElementById(id).value
-location.href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo str_replace('\\', '/', realpath($dir)); ?>&targetfile="+newfn+"&perma=<?php if($CurrOS!='Linux') echo str_replace('\\', '/', realpath('perma')); else echo str_replace('\\', '/', realpath('permalinux')); ?>";
+location.href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo str_replace('\\', '/', realpath($dir)); ?>&targetfile="+newfn+"&perma=<?php if($CurrOS!='Linux') echo str_replace('\\', '/', $dirp); else echo str_replace('\\', '/', realpath('permalinux')); ?>";
 
 }
 </script>
@@ -1571,7 +1572,7 @@ function psexec(phpfile) {
 <table width="100%" style="clear: both;">
   <tr>
     <td><hr /></td>
-    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=specific-here.inc&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>
+    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=specific-here.inc&perma=<?php if($CurrOS!='Linux') echo $dirp; else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>
     <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>specific-here.inc");  return false;'><img src="/doc/files/common/images/text.png"/></a>
 	&nbsp;<strong>Saved commands specific to this &#34;<script>document.write("<?php echo $prjname; ?>");</script>&#34; project </strong><small>(stored in web page, see specific-here.inc, runs on Windows server)</small></td>
     <td><hr /></td>
@@ -1604,7 +1605,7 @@ if (file_exists($dir.'/'."specific-here.inc"))
 <table width="100%" style="clear: both;">
   <tr>
     <td><hr /></td>
-    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><a href="#view"><span><img src="/doc/files/common/images/eye.gif"></span></a>&nbsp;<img src="/doc/files/common/images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" /></span>&nbsp;<strong>Frequent Edit</strong>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.recentedit&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif" title="Edit this section"/></a>
+    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><a href="#view"><span><img src="/doc/files/common/images/eye.gif"></span></a>&nbsp;<img src="/doc/files/common/images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" /></span>&nbsp;<strong>Frequent Edit</strong>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.recentedit&perma=<?php if($CurrOS!='Linux') echo $dirp; else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif" title="Edit this section"/></a>
 	    <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.recentedit");  return false;'><img src="/doc/files/common/images/text.png"/></a>
 <script>
 function recentedit_plus() {
@@ -1799,7 +1800,10 @@ doc.close();
 <div class="newspaper" style="background-color: lightblue; opacity: 0.6" id="lightbluediv">
 <?php
 if($CurrOS=="Linux") echo "<small>Disabled because you are using ".$CurrOS."</small><br/>";
-$dirperma="perma";
+$dirperma=$files_path_common_absolute."\perma";
+$dirpm=$files_path_common_absolute."\permalinux";
+
+echo 'dirperma est ' . $dirperma . '<br/>';
 if ($handle = opendir($dir)) {
 	$i=0;
     while (false !== ($file = readdir($handle))) {
@@ -2068,7 +2072,7 @@ echo "<hr/>\n";
 <table width="100%">
   <tr>
     <td><hr /></td>
-    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><img src="/doc/files/common/images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Drag and drop url links in the box below</strong>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.links&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif" title="Edit this section"/></a>
+    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><img src="/doc/files/common/images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Drag and drop url links in the box below</strong>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.links&perma=<?php if($CurrOS!='Linux') echo $dirp; else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif" title="Edit this section"/></a>
     <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.links");  return false;'><img src="/doc/files/common/images/text.png"/></a>
 	
 	</td>
@@ -2087,7 +2091,7 @@ echo "<hr/>\n";
 <table width="100%">
   <tr>
     <td><hr /></td>
-    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><img src="/doc/files/common/images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Make a sound alert when the following file changes</strong>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.sound&perma=<?php if($CurrOS!='Linux') echo realpath('perma'); else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif" title="Edit this section"/></a>
+    <td style="width:1px; padding: 0 10px; white-space: nowrap;"><img src="/doc/files/common/images/refresh.gif" onclick="location.reload(true);" style="cursor:pointer" title="Reload" />&nbsp;<strong>Make a sound alert when the following file changes</strong>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.sound&perma=<?php if($CurrOS!='Linux') echo $dirp; else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif" title="Edit this section"/></a>
     <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.sound");  return false;'><img src="/doc/files/common/images/text.png"/></a>
 	</td>
     <td><hr /></td>
