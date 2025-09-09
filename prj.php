@@ -1315,7 +1315,7 @@ if (file_exists($dir."/.code")) {
 <fieldset style="float: left;">
 <legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.previous&perma=<?php if($CurrOS!='Linux') echo $dirp; else echo realpath('permalinux'); ?>" ><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>
         <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.previous");  return false;'><img src="/doc/files/common/images/text.png"/></a>
-              <a href="jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePagePrevious" target="pickf" onclick="javascript:void window.open('jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePagePrevious','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/add_file.png"/></a>
+              <a href="/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePagePrevious" target="pickf" onclick="javascript:void window.open('/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePagePrevious','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/add_file.png"/></a>
         &nbsp;<img src="/doc/files/common/images/Arrowprevious48.png"/> 
 </legend>
 <?php echo @file_get_contents($proj_dir."/.previous"); ?>
@@ -1323,7 +1323,7 @@ if (file_exists($dir."/.code")) {
 <fieldset>
 <legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.next&perma=<?php if($CurrOS!='Linux') echo $dirp; else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>
         <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.next");  return false;'><img src="/doc/files/common/images/text.png"/></a>
-              <a href="jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePageNext" target="pickf" onclick="javascript:void window.open('jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePageNext','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/add_file.png"/></a>
+              <a href="/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePageNext" target="pickf" onclick="javascript:void window.open('/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePageNext','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/add_file.png"/></a>
         &nbsp;<img src="/doc/files/common/images/Arrownext48.png"/> 
 </legend>
 <?php echo @file_get_contents($proj_dir."/.next"); ?>
@@ -1413,7 +1413,7 @@ if($param1!="") echo "\";";
 <fieldset style="float: left;">
 <legend>&nbsp;<a href="/doc/files/common/downloadfile.php?fname=<?php if($CurrOS!='Linux') echo 'ui_';?>edit_this.<?php if($CurrOS!='Linux') echo 'run'; else echo 'rn'?>&targetdir=<?php echo realpath($dir); ?>&targetfile=.related&perma=<?php if($CurrOS!='Linux') echo $dirp; else echo realpath('permalinux'); ?>"><img src="/doc/files/common/images/notepad-plus-plus.gif"/></a>
     <a href="#" onclick='openOnce("/doc/files/Engineering/ENVIRONMENT/PHP_SERVER/ICEcoder2/", "editor", "<?php echo $urldir; ?>.related");  return false;'><img src="/doc/files/common/images/text.png"/></a>
-              <a href="jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePage" target="pickf" onclick="javascript:void window.open('jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePage','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/add_file.png"/></a>
+              <a href="/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePage" target="pickf" onclick="javascript:void window.open('/doc/files/common/jquery-fileTree/pickrelated.php?parent=<?php echo $display_link;?>&close=closePage','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');return false;"><img src="/doc/files/common/images/add_file.png"/></a>
         &nbsp;<small>(.related)</small> Related: 
 </legend>
 <?php echo @file_get_contents($proj_dir."/.related"); ?>
@@ -1612,10 +1612,10 @@ function recentedit_plus() {
 // rajouter le contenu de l'input field inpg
 var search_or_line_number = document.getElementById('inpg').value;
 //alert(search_or_line_number);
-window.open('jquery-fileTree/pickrecentedit.php?drive=c&param1='+search_or_line_number+'&parent=<?php echo $display_link;?>&headpath=:/UniServer/www/doc/files','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');
+window.open('/doc/files/common/jquery-fileTree/pickrecentedit.php?drive=c&param1='+search_or_line_number+'&parent=<?php echo $display_link;?>&headpath=:/UniServer/www/doc/files','1481656702602','width=550,height=750,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=100,top=50');
 }
 </script>
-		&nbsp;<a href="jquery-fileTree/pickrecentedit.php?drive=c&parent=<?php echo $display_link;?>&headpath=:/UniServer/www/doc/files" target="pickf" onclick="recentedit_plus(); return false;"><img src="/doc/files/common/images/add_file.png" title="C:\"/></a>
+		&nbsp;<a href="/doc/files/common/jquery-fileTree/pickrecentedit.php?drive=c&parent=<?php echo $display_link;?>&headpath=:/UniServer/www/doc/files" target="pickf" onclick="recentedit_plus(); return false;"><img src="/doc/files/common/images/add_file.png" title="C:\"/></a>
 	<!--
 	&nbsp;&nbsp;<a href="/doc/files/common/jquery-fileTree/pickrecentedit.php?drive=//&parent=<?php echo $display_link;?>&headpath=mlerman-vm-mint/lfiles" target="pickf"><img src="/doc/files/common/images/add_file.png" title="M:\"/></a> 
 	-->
