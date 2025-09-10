@@ -1,12 +1,22 @@
 <?php
+//echo 'from RewriteRule new REQUEST_URI is '. $_SERVER['REQUEST_URI'].'<br/>';
 $files_path = file_get_contents($_SERVER['DOCUMENT_ROOT'].'\local\FILES_PATH.sh.bat');
-//echo '<br/>';
-//echo 'on est dans ' . getcwd() . "\n";
-//echo '<br/>';
+//echo 'on est dans ' . getcwd() . "<br/>";
 $files_path = str_replace("set FILES_PATH=", "", $files_path);
+//echo 'files_path est '.$files_path.'<br/>';
 $files_path_common_absolute = $files_path;
 
-$dir =  getcwd();
+$request_uri_trail = str_replace("/doc/files/", "", $_SERVER['REQUEST_URI']);
+$request_uri_trail = str_replace("/open-command-prompt-here.html", "", $request_uri_trail);
+$request_uri_dir=$files_path . $request_uri_trail;
+
+//echo 'request_uri_dir est '.$request_uri_dir.'<br/>';
+
+
+//$dir =  getcwd();
+$dir = $request_uri_dir; // 'C:\UniServer\www\doc\files\Project_For_Test'; //ml forced for test
+//echo "dir is (by the curent dir) : ".$dir.'<br/>';   //ml  dir is C:/UniServer/www/doc/files/common
+
 $files_path = str_replace("\\", "/", $dir);
 
 $files_path = str_replace("\\", "/", $files_path);
@@ -72,7 +82,6 @@ $urldir=substr($display_link, $pos).'/';
 //echo 'urldir '.$urldir.'<br/>';
 $display_link=substr($display_link, $pos+10);
 //echo 'display_link '.$display_link.'<br/>';		//ml  display_link /common/
-//echo "dir is ".$dir.'<br/>';   //ml  dir is C:/UniServer/www/doc/files/common
 
 $proj_dir=$dir;
 $proj_dir_lin=str_replace("C:/UniServer/www/doc/","/home/user/",$proj_dir);
@@ -1796,7 +1805,7 @@ if($CurrOS=="Linux") echo "<small>Disabled because you are using ".$CurrOS."</sm
 $dirperma=$files_path_common_absolute."\perma";
 $dirpm=$files_path_common_absolute."\permalinux";
 
-echo 'dirperma est ' . $dirperma . '<br/>';
+//echo 'dirperma est ' . $dirperma . '<br/>';
 if ($handle = opendir($dir)) {
 	$i=0;
     while (false !== ($file = readdir($handle))) {
