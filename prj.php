@@ -39,8 +39,7 @@ $secondLastSlash = strrpos(substr($files_path, 0, $lastSlash), "/");
 
 // Extract the substring from the second to last slash onwards
 $slash_files = substr($files_path, $secondLastSlash);
-//echo 'slash_files est ' . $slash_files;  // example /doc/files
-//echo '<br/>';
+//echo 'slash_files est ' . $slash_files.'<br/>';  // example /doc/files
 
 
 // detect OS on client
@@ -48,6 +47,7 @@ $onmouseover='';    // TODO previent erreur avec wampserver, a revoir
 $param1='';
 $link =  "//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 //echo 'link est '.$link.'<br/>';		//ml //siliconkit.com/doc/files/common/open-command-prompt-here.html
+
 $linkip =  "//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 //echo 'linkip est '.$linkip.'<br/>';	//ml  linkip est //192.168.1.72/doc/files/common/open-command-prompt-here.html
 
@@ -61,10 +61,7 @@ $escaped_link = htmlspecialchars($link, ENT_QUOTES, 'UTF-8');
 
 
 $pos=strpos($escaped_link,"/doc/files");
-
-
-// $escaped_link_cut=substr($escaped_link,0,-29);
-$escaped_link_cut='/doc' . $slash_files;
+$escaped_link_cut=substr($escaped_link,$pos,-29);		// remove open-command-prompt-here.html which is 29 characters
 //echo 'escaped_link_cut '.$escaped_link_cut.'<br/>';  //ml  escaped_link_cut //siliconkit.com/doc/files/common/
 
 $id_link=$escaped_link_cut;
@@ -80,8 +77,9 @@ $host=$_SERVER['HTTP_HOST'];
 //echo 'host '.$host.'<br/>';
 $urldir=substr($display_link, $pos).'/';
 //echo 'urldir '.$urldir.'<br/>';
-$display_link=substr($display_link, $pos+10);
-//echo 'display_link '.$display_link.'<br/>';		//ml  display_link /common/
+//echo 'display_link '.$display_link.' 1<br/>';		//ml  display_link /common/
+//ml removed $display_link=substr($display_link, $pos+10);
+//echo 'display_link '.$display_link.' 2<br/>';		//ml  display_link /common/
 
 $proj_dir=$dir;
 $proj_dir_lin=str_replace("C:/UniServer/www/doc/","/home/user/",$proj_dir);
@@ -1460,8 +1458,11 @@ else
 <?php
 $escaped_link_cut.="favicon.ico";
 
-$file_data = '<a href="delete_line_in_recent.php?line='.uniqid().'" onclick="delEntry(this.href); return false;"><img src="/doc/files/common/images/delete.png"/></a>&nbsp;<a href="'.$dir_loc.'/open-command-prompt-here.html" target="'.$prjname.'"><img src="'.$dir_loc.'/favicon.ico"  height="16" width="16"/>'.$display_link.'</a>'.$icon_run."<br/>\n";
+$file_data = '<a href="/doc/files/common/delete_line_in_recent.php?line='.uniqid().'" onclick="delEntry(this.href); return false;"><img src="/doc/files/common/images/delete.png"/></a>&nbsp;<a href="'.$dir_loc.'/open-command-prompt-here.html" target="'.$prjname.'"><img src="'.$dir_loc.'/favicon.ico"  height="16" width="16"/>'.$display_link.'</a>'.$icon_run."<br/>\n";
 $ignorebefore=109;
+//echo  $file_data." file_data<br/\n>"; 
+//echo  $dir_loc." dir_loc<br/\n>"; 
+//echo  $display_link." display_link<br/\n>"; 
 
 
 $frecent='/UniServer/www/local/recent.txt';
@@ -1484,9 +1485,9 @@ if(substr($file_data,$ignorebefore)!=substr($firstline,$ignorebefore)) {		// onl
     $buffer = fgets($fh);
 
      if (substr($buffer, $ignorebefore) == substr($file_data,$ignorebefore)) {
-     //echo $buffer." skiped<br/>\n";
+//echo $buffer." skiped<br/>\n";
      }  else {
-     //echo $buffer."<br/>\n";
+//echo $buffer." ok<br/>\n";
      $content.=$buffer;
      }
    $i++;
